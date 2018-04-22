@@ -3,6 +3,16 @@
 @section('content')
 <h1>Create new Floor</h1><br><br>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 <form role="form" method="post" action="/floors">
     {{csrf_field()}}
 

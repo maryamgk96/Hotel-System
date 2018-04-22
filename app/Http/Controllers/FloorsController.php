@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreFloorRequest;
 use Yajra\Datatables\Datatables;
 use App\Floor;
 use App\User;
@@ -30,7 +31,7 @@ class FloorsController extends Controller
         return view('floors.create');
     }
 
-    public function store(Request $request){
+    public function store(StoreFloorRequest $request){
         $randomId= $this-> generateFloorNumber();
         Floor::create([
             'id' => $randomId,

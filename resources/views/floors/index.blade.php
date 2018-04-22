@@ -27,7 +27,7 @@
                         { data: 'id', name: 'id' },
                         { data: 'name', name: 'name' },
                         { data: 'created_by', name: 'created_by' },
-                        { data: 'actions', name: 'actions'},
+                        { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                      ]
             });
          });
