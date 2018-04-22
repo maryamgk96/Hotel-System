@@ -58,4 +58,27 @@ class FloorsController extends Controller
     private function FloorNumberExists($number) {
         return Floor::where('id', $number)->exists();
     }
+
+    public function edit($id){
+        $floor=Floor::find($id);
+
+        return view('floors.edit',[
+            'floor' => $floor,
+        ]);
+    }
+
+    public function update(StoreFloorRequest $request,$id){
+        $floor=Floor::find($id)->update([
+            'name' => $request->name,
+        ]);
+        
+       return redirect(route('floors.index')); 
+    }
+
+
+    public function destroy(Request $request,$id){
+        Floor::find($id)->delete();
+
+        return redirect(route('floors.index')); 
+    }
 }

@@ -10,7 +10,7 @@
                   <tr>
                      <th>Id</th>
                      <th>Name</th>
-                     <th>Created By</th>
+                     <th>Manager Name​</th>
                      <th>Actions</th>
                   </tr>
                </thead>
