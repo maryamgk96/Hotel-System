@@ -1,6 +1,6 @@
 <!-- Main Header -->
 <header class="main-header">
-
+   
     <!-- Logo -->
     <a href="index2.html" class="logo"><b>Hotel</b>System</a>
 
