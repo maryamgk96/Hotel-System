@@ -17,16 +17,13 @@ class Room extends Model
     ];
     public function floor()
     {
-        return $this->hasOne('Floor', 'foreign_key');
+        return $this->belongsTo(Floor::class,'floor_id');
     }
     public function user()
     {
-        return $this->belongsTo('User', 'foreign_key');
+        return $this->belongsTo(User::class,'created_by');
     }
-    public function reservation()
-    {
-        return $this->hasOne('Reservation');
-    }
+  
 
 
 }

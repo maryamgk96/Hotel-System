@@ -17,16 +17,16 @@ class Reservation extends Model
     ];
     public function client()
     {
-        return $this->hasOne('Client', 'foreign_key');
+        return $this->belongsTo(Client::class,'client_id');
     }
 
     public function room()
     {
-        return $this->hasOne('Room', 'foreign_key');
+        return $this->hasOne(Room::class,'room_id');
     }
     public function user()
     {
-        return $this->belongsTo('User', 'foreign_key');
+        return $this->belongsTo(User::class,'created_by');
     }
 
 

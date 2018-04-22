@@ -4,7 +4,7 @@
                <h2>Manage Floors</h2>
 
 
-               <a href="/floors/create"  class="btn btn-primary">Create New FLoor</a><br><br>
+             <a href="/floors/create"  class="btn btn-primary">Create New FLoor</a><br><br>
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>
