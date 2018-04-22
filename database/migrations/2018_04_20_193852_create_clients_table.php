@@ -24,7 +24,6 @@ class CreateClientsTable extends Migration
             $table->string('country');
             $table->boolean('is_approved')->default(0);
             $table->unsignedInteger('approved_by');
-            $table->foreign('approved_by')->references('id')->on('users');
             $table->date('last_login');
             $table->timestamps();    
         });

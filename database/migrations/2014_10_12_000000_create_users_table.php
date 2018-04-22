@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->integer('national_id');
             $table->string('avatar')->default(' ');
             $table->unsignedInteger('created_by');
-            $table->foreign('created_by')->references('id')->on('users');
             $table->boolean('is_banned')->default(0);
             $table->rememberToken();
             $table->timestamps();

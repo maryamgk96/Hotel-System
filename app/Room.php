@@ -11,7 +11,7 @@ class Room extends Model
         'name',
         'created_by',
         'capacity',
-       'price',
+        'price',
         'floor_id',
         'is_reserved',
     ];
@@ -19,9 +19,9 @@ class Room extends Model
     {
         return $this->belongsTo(Floor::class,'floor_id');
     }
-    public function user()
+    public function reservations()
     {
-        return $this->belongsTo(User::class,'created_by');
+        return $this->hasMany(Reservation::class);
     }
   
 
