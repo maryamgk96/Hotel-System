@@ -17,10 +17,12 @@
     <tr>
     <td>{{$floor->name}}</td>
     <td>{{$floor->id}}</td>
-    <td>{{$floor->created_by}}</td>
+    <td>{{$floor->user->name}}</td>
     <td><a href="/floors/{{$floor->id}}/edit"><button class="btn btn-primary">Edit</button></a>
     <form method="post" action="/floors/{{$floor->id}}">{{method_field('delete')}}
-{{csrf_field()}}<button  type="submit" class="btn btn-danger" onclick="return confirm('Are you sure that you want to delete this post ?')">Delete</button></form></td>
+{{csrf_field()}}<button  type="submit" class="btn btn-danger" onclick="return confirm('Are you sure that you want to delete this Floor ?')">Delete</button>
+</form>
+</td>
     </tr>
     @endforeach 
   </tbody>

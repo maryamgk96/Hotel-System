@@ -20,13 +20,12 @@ class User extends Authenticatable
         'password',
        'national_id',
         'avatar',
-        'type',
         'created_by',
         'is_banned',
     ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'created_by');
     }
 
     /**

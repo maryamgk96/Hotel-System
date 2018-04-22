@@ -13,13 +13,10 @@ class Floor extends Model
         'name',
         'created_by',
     ];
-    public function room()
-    {
-        return $this->hasMany(Room::class);
-    }
+  
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'created_by');
     }
     
 }

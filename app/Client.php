@@ -19,11 +19,11 @@ class Client extends Model
     ];
     public function user()
     {
-        return $this->belongsTo('User', 'foreign_key');
+        return $this->belongsTo(User::class,'approved_by');
     }
     public function reservations()
     {
-        return $this->hasMany('Reservation');
+        return $this->hasMany(Reservation::class);
     }
     
 }
