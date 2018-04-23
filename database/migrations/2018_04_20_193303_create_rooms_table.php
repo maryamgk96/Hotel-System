@@ -15,10 +15,10 @@ class CreateRoomsTable extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('created_by');
+            $table->unsignedInteger('created_by');
             $table->integer('capacity');
             $table->float('price');
-            $table->integer('floor_id');
+            $table->unsignedInteger('floor_id');
             $table->boolean('is_reserved')->default(0);
             $table->timestamps();
         });

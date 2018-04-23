@@ -14,4 +14,10 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('floors', 'FloorsController@index');
+Route::get('floors', 'FloorsController@index')->name('floors.index');
+Route::get('floordata', 'FloorsController@data');
+Route::get('floors/create', 'FloorsController@create');
+Route::post('floors', 'FloorsController@store');
+Route::get('floors/{id}/edit', 'FloorsController@edit');
+Route::put('floors/{id}', 'FloorsController@update');
+Route::delete('floors/{id}', 'FloorsController@destroy');

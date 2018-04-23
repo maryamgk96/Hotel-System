@@ -15,19 +15,17 @@ class Reservation extends Model
         'no_companions',
         'created_by',
     ];
-    public function client()
-    {
-        return $this->hasOne('Client', 'foreign_key');
-    }
+    
 
     public function room()
     {
-        return $this->hasOne('Room', 'foreign_key');
+        return $this->hasMany(Room::class);
     }
-    public function user()
-    {
-        return $this->belongsTo('User', 'foreign_key');
-    }
+    
+    
+    
+
+
 
 
 }

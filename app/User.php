@@ -17,14 +17,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-       'national_id',
+        'national_id',
         'avatar',
-        'user_id',
+        'created_by',
         'is_banned',
     ];
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class,'created_by');
     }
 
     /**

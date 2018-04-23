@@ -23,7 +23,7 @@ class CreateClientsTable extends Migration
             $table->integer('mobile');
             $table->string('country');
             $table->boolean('is_approved')->default(0);
-            $table->integer('user_id');  //approved_by
+            $table->unsignedInteger('approved_by');
             $table->date('last_login');
             $table->timestamps();    
         });

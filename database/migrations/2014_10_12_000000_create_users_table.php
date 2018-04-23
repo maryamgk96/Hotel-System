@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->integer('national_id');
             $table->string('avatar')->default(' ');
-            $table->integer('user_id');  //created_by
+            $table->unsignedInteger('created_by');
             $table->boolean('is_banned')->default(0);
             $table->rememberToken();
             $table->timestamps();

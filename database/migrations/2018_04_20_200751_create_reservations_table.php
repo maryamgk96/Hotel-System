@@ -18,7 +18,6 @@ class CreateReservationsTable extends Migration
             $table->integer('room_id');
             $table->integer('client_id');
             $table->integer('paid_price');
-            $table->integer('created_by');
             $table->integer('no_companions');
             $table->timestamps();
         });
