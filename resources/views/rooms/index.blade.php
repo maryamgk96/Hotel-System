@@ -1,15 +1,17 @@
 @extends('admin_template')
 
 @section('content')
-               <h2>Manage Floors</h2>
+               <h2>Manage Rooms</h2>
 
 
-             <a href="/floors/create"  class="btn btn-primary">Create New FLoor</a><br><br>
+             <a href="/rooms/create"  class="btn btn-primary">Create New Room</a><br><br>
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>
                      <th>Number</th>
-                     <th>Name</th>
+                     <th>Capacity</th>
+                     <th>Price In Dollars</th>
+                     <th>Floor Name</th>
                      <th>Manager Name​</th>
                      <th>Actions</th>
                   </tr>
@@ -22,10 +24,12 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ url('floordata') }}',
+               ajax: '{{ url('roomdata') }}',
                columns: [
-                        { data: 'number', name: 'number' },
-                        { data: 'name', name: 'name' },
+                        { data: 'id', name: 'id' },
+                        { data: 'capacity', name: 'capacity' },
+                        { data: 'price', name: 'price'},
+                        { data: 'floor_id', name: 'floor_id' },
                         { data: 'created_by', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                      ]

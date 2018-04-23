@@ -23,8 +23,8 @@ class FloorsController extends Controller
         $floor = Floor::query();
         
         return Datatables::of($floor) ->addColumn('actions', function ($floor) {
-            return '<a href="#" >Edit</a>';
-        })->make(true); 
+            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary"> Edit</a>';
+        })->rawcolumns(['actions'])->make(true); 
     }
     
     public function create(){
@@ -34,7 +34,7 @@ class FloorsController extends Controller
     public function store(StoreFloorRequest $request){
         $randomId= $this-> generateFloorNumber();
         Floor::create([
-            'id' => $randomId,
+            'number' => $randomId,
             'name' => $request->name,
 
             'created_by' => 1 //// must be modified to be user logined (admin or manager)

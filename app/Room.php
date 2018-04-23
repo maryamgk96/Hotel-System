@@ -8,10 +8,11 @@ use  App\User;
 class Room extends Model
 {
     protected $fillable = [
-        'created_by',
+        'number',
         'capacity',
         'price',
         'floor_id',
+        'created_by',
         'is_reserved',
     ];
     public function floor()
