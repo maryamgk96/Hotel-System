@@ -26,8 +26,11 @@ Route::delete('floors/{id}', 'FloorsController@destroy');
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'ReservationsController@data');
-Route::get ('reservations/create','ReservationsController@create');
-Route::post('reservations','ReservationsController@store');
+Route::get('reservations/roomsdata', 'ReservationsController@show');
+Route::get('reservations/rooms', 'ReservationsController@showrooms');
+Route::get('reservations/rooms', 'ReservationsController@showrooms');
+Route::get ('reservations/create/{room_id}','ReservationsController@create');
+Route::post('reservations/{room_id}','ReservationsController@store');
 
 Auth::routes();
 

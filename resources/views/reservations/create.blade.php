@@ -14,31 +14,16 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form"method="post" action="/reservations">
+            <form role="form"method="post" action="/reservations/{{$room->id}}">
             {{csrf_field()}}
-              <div class="box-body">
-                        Room Number: <select class="form-control" name="room_id" id="exampleFormControlSelect1">
-                        <option>-------</option>
-                            @foreach ($rooms as $room)
-                                <option value="{{$room->id}}">{{$room->id}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        Client Name: <select class="form-control" name="client_id" id="exampleFormControlSelect1">
-                        <option>-------</option>
-                        @foreach ($clients as $client)
-                        <option value="{{$client->id}}">{{$client->name}}</option>
-                        @endforeach
-                        </select>
-                    </div>
+           
                             <div class="form-group">
                                 <label> Paid Price :</label>
                                 <input type="text" class="form-control" name="paid_price" placeholder="Please Enter Paid Price">
                             </div>
                             <div class="form-group">
                                 <label> Number Of Companions :</label>
-                                <input type="text" class="form-control" name="no_companions" placeholder="Please Enter Number Of Companions">
+                                <input type="text" class="form-control" name="no_companions"  placeholder="Please Enter Number Of Companions">
                             </div>
                                 </div>
               <div class="box-footer">

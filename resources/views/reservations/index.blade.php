@@ -3,13 +3,12 @@
 @section('content')
 
 <h1 align="center">My Reservations</h1>
-<a href="/reservations/create"  class="btn btn-primary">Create New Reservation</a><br><br>
+<a href="/reservations/rooms"  class="btn btn-primary">Show Rooms</a><br><br>
 <table class="table table-bordered" id="table">
   <thead>
     <tr>
     <th scope="col">ID</th>
       <th scope="col">Room</th>
-      <th scope="col">Client Name</th>
       <th scope="col">Paid Price</th>
       <th scope="col">Number Of Companions</th>
     </tr>
@@ -24,7 +23,6 @@
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'room_id', name: 'room_id' },
-                        { data: 'client_id', name: 'client_id' },
                         { data: 'paid_price', name: 'room_id' },
                         { data: 'no_companions', name: 'no_companions' },
 
