@@ -8,7 +8,7 @@ use  App\User;
 class Room extends Model
 {
     protected $fillable = [
-        'name',
+        'number',
         'created_by',
         'capacity',
         'price',
