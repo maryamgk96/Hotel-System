@@ -22,8 +22,8 @@ class RoomsController extends Controller
         $rooms = Room::all();
         
         return Datatables::of($rooms) ->addColumn('actions', function ($room) {
-            return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xs btn-primary"> Edit</a>';
-        })->make(true); 
+            return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xm btn-primary"> Edit</a>';
+        })->rawcolumns(['actions'])->make(true); 
     }
 
     public function create(){
