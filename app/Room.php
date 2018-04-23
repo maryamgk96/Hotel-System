@@ -11,7 +11,7 @@ class Room extends Model
         'name',
         'created_by',
         'capacity',
-       'price',
+        'price',
         'floor_id',
         'is_reserved',
     ];

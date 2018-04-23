@@ -4,7 +4,6 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\User;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -20,8 +19,7 @@ class User extends Authenticatable
         'password',
        'national_id',
         'avatar',
-        'type',
-        'created_by',
+        'user_id',
         'is_banned',
     ];
     public function user()
