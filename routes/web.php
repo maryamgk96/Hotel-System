@@ -21,3 +21,46 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+
+
+
+//UserController Routes
+Route::get(
+    '{role}',
+    'UserController@index'
+)->name('users.index')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager|receptionist');
+
+Route::get(
+    '{role}/create',
+    'UserController@create'
+)->name('users.create')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager');
+
+Route::post(
+    '{role}',
+    'UserController@store'
+)->name('users.store')->where('role', 'managers|receptionists');
+
+Route::get(
+    '{role}/{user}',
+    'UserController@show'
+)->name('users.show')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager');
+
+Route::get(
+    '{role}/{user}/edit',
+    'UserController@edit'
+)->name('users.edit')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager');
+
+Route::put(
+    '{role}/{user}',
+    'UserController@update'
+)->name('users.update')->where('role', 'managers|receptionists');
+
+Route::delete(
+    '{role}/{user}',
+    'UserController@destroy'
+)->name('users.destroy')->where('role', 'managers|receptionists');
