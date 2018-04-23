@@ -13,9 +13,11 @@ class Client extends Model
         'password',
         'mobile',
         'country',
+        'gender',
+        'avatar',
         'is_approved',
         'approved_by',
-        'last_login'
+        
     ];
     public function user()
     {

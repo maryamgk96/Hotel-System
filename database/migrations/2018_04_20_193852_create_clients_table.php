@@ -22,9 +22,10 @@ class CreateClientsTable extends Migration
             $table->string('avatar')->default(' ');
             $table->integer('mobile');
             $table->string('country');
+            $table->smallInteger('gender');
             $table->boolean('is_approved')->default(0);
             $table->unsignedInteger('approved_by');
-            $table->date('last_login');
+            $table->timestamp('last_login')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamps();    
         });
     }

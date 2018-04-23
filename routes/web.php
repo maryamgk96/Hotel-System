@@ -21,3 +21,13 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+
+
+Route::get('clients', 'ClientsController@index');
+Route::get('data', 'ClientsController@ajaxData');
+Route::get('clients/create', 'ClientsController@create');
+Route::post('clients','ClientsController@store');
+Route::get('clients/{id}/edit', 'ClientsController@edit');
+Route::put('clients/{id}', 'ClientsController@update');
+
+
