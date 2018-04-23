@@ -8,7 +8,7 @@
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>
-                     <th>Id</th>
+                     <th>Number</th>
                      <th>Name</th>
                      <th>Manager Name​</th>
                      <th>Actions</th>
@@ -24,7 +24,7 @@
                serverSide: true,
                ajax: '{{ url('floordata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
+                        { data: 'number', name: 'number' },
                         { data: 'name', name: 'name' },
                         { data: 'created_by', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},

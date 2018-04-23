@@ -22,6 +22,21 @@ class RoomsController extends Controller
         
         return Datatables::of($rooms) ->addColumn('actions', function ($room) {
             return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xs btn-primary"> Edit</a>';
-        })->editColumn('created_by', 'created_by: {{$room->user->name}}')->make(true); 
+        })->make(true); 
+    }
+
+    public function create(){
+        return view('rooms.create');
+    }
+
+    public function store(Request $request){
+        Room::create([
+            'number' => $randomId,
+            'name' => $request->name,
+
+            'created_by' => 1 //// must be modified to be user logined (admin or manager)
+        ]);
+        
+       return redirect(route('rooms.index')); 
     }
 }

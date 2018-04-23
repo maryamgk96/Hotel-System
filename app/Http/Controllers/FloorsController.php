@@ -15,7 +15,7 @@ class FloorsController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(){  
+    public function index(){ 
         return view('floors.index');
     }
     
@@ -34,7 +34,7 @@ class FloorsController extends Controller
     public function store(StoreFloorRequest $request){
         $randomId= $this-> generateFloorNumber();
         Floor::create([
-            'id' => $randomId,
+            'number' => $randomId,
             'name' => $request->name,
 
             'created_by' => 1 //// must be modified to be user logined (admin or manager)

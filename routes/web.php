@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+//manage floors routes
 Route::get('floors', 'FloorsController@index')->name('floors.index');
 Route::get('floordata', 'FloorsController@data');
 Route::get('floors/create', 'FloorsController@create');
@@ -25,3 +26,8 @@ Route::delete('floors/{id}', 'FloorsController@destroy');
 //manage rooms routes
 Route::get('rooms', 'RoomsController@index')->name('rooms.index');
 Route::get('roomdata', 'RoomsController@data');
+Route::get('rooms/create', 'RoomsController@create');
+Route::post('rooms', 'RoomsController@store');
+Route::get('rooms/{id}/edit', 'RoomsController@edit');
+Route::put('rooms/{id}', 'RoomsController@update');
+Route::delete('rooms/{id}', 'RoomsController@destroy');
