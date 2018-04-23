@@ -19,13 +19,12 @@ class Reservation extends Model
 
     public function room()
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(Room::class,'room_id');
+    }
+    public function client()
+    {
+        return $this->belongsTo(Client::class,'client_id');
     }
     
-    
-    
-
-
-
 
 }

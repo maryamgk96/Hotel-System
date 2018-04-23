@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreFloorRequest;
 use Yajra\Datatables\Datatables;
 use App\Floor;
-use App\User;
+
 
 class FloorsController extends Controller
 {
@@ -15,16 +15,22 @@ class FloorsController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function index(){  
+    public function index(){ 
         return view('floors.index');
     }
     
     public function data(){
-        $floor = Floor::query();
+        $floors = Floor::query();
         
+<<<<<<< HEAD
+        return Datatables::of($floors) ->addColumn('actions', function ($floor) {
+            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xs btn-primary"> Edit</a>';
+        })->make(true); 
+=======
         return Datatables::of($floor) ->addColumn('actions', function ($floor) {
             return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"> Edit</a>';
         })->rawcolumns(['actions'])->make(true); 
+>>>>>>> 995eb3dc7cd70f954667991cd833aaf2b592aaa9
     }
     
     public function create(){
@@ -44,10 +50,10 @@ class FloorsController extends Controller
     }
 
     private function generateFloorNumber() {
-        $number = mt_rand(0000, 9999); 
+        $number = mt_rand(1000, 9999); 
     
         // call the same function if the floor number exists already
-        if ($this-> FloorNumberExists($number)) {
+        if (Floor::where('id', $number)->exists()) {
             return generateFloorNumber();
         }
     
@@ -55,9 +61,7 @@ class FloorsController extends Controller
         return $number;
     }
     
-    private function FloorNumberExists($number) {
-        return Floor::where('id', $number)->exists();
-    }
+   
 
     public function edit($id){
         $floor=Floor::find($id);

@@ -23,6 +23,11 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+//manage reservations routes
+Route::get('reservations', 'ReservationsController@index');
+Route::get('reservationdata', 'ReservationsController@data');
+Route::get ('reservations/create','ReservationsController@create');
+Route::post('reservations','ReservationsController@store');
 
 Auth::routes();
 
@@ -78,6 +83,5 @@ Route::get('rooms/{id}/edit', 'RoomsController@edit');
 Route::put('rooms/{id}', 'RoomsController@update');
 Route::delete('rooms/{id}', 'RoomsController@destroy');
 
-Route::get('reservations', 'ReservationsController@index');
-Route::get ('reservations/create','ReservationsController@create');
-Route::post('reservations','ReservationsController@store');
+
+

@@ -13,6 +13,7 @@ class Floor extends Model
         'name',
         'number',
         'created_by',
+        
     ];
   
     public function user()
