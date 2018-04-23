@@ -21,3 +21,7 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+
+//manage rooms routes
+Route::get('rooms', 'RoomsController@index')->name('rooms.index');
+Route::get('roomdata', 'RoomsController@data');
