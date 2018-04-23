@@ -21,3 +21,6 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+Route::get('reservations', 'ReservationsController@index');
+Route::get ('reservations/create','ReservationsController@create');
+Route::post('reservations','ReservationsController@store');
