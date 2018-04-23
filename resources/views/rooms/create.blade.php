@@ -8,6 +8,7 @@
         {{csrf_field()}}
 
         <!-- text input -->
+
         <div class="form-group">
             <label>Number</label>
             <input type="number" name="number" class="form-control" placeholder="Enter Room Number">
@@ -15,26 +16,26 @@
 
         <div class="form-group">
             <label>Capacity</label>
-            <input type="number"  name="capacity" class="form-control" placeholder="Enter room capacity">
+            <input type="number" name="capacity" class="form-control" placeholder="Enter room capacity">
         </div>
 
         <div class="form-group">
             <label>Price</label>
-            <input type="text"  name="price" class="form-control" placeholder="Enter room price">
+            <input type="text" name="price" class="form-control" placeholder="Enter room price">
         </div>
 
         <!-- select -->
         <div class="form-group">
             <label>Floor</label>
             <select class="form-control" name="floor_id">
-            @foreach ($floors as $floor)
+                @foreach ($floors as $floor)
                 <option value="{{$floor->id}}">{{$floor->name}}</option>
-            @endforeach   
+                @endforeach
             </select>
         </div>
-        <input type="submit" class="btn btn-primary" value="Create"/>
+        <input type="submit" class="btn btn-primary" value="Create" />
     </form>
 </div>
 
-</form>
+
 @endsection

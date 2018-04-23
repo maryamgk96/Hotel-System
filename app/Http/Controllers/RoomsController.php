@@ -44,4 +44,24 @@ class RoomsController extends Controller
         
        return redirect(route('rooms.index')); 
     }
+
+    public function edit($id){
+        $room = Room::find($id);
+        $floors = Floor::all();
+        return view('rooms.edit',[
+            'room' => $room,
+            'floors' => $floors
+        ]);
+    }
+
+    public function update(Request $request,$id){
+        $room = Room::find($id)->update([
+            'number' => $request -> number,
+            'capacity' => $request -> capacity,
+            'price' => $request -> price,
+            'floor_id' => $request -> floor_id,
+        ]);
+        
+       return redirect(route('floors.index')); 
+    }
 }

@@ -23,7 +23,7 @@ class FloorsController extends Controller
         $floor = Floor::query();
         
         return Datatables::of($floor) ->addColumn('actions', function ($floor) {
-            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary"> Edit</a>';
+            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"> Edit</a>';
         })->rawcolumns(['actions'])->make(true); 
     }
     
