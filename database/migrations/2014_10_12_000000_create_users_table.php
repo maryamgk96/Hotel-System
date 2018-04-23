@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('password');
             $table->string('email')->unique();
-            $table->integer('national_id');
+            $table->string('national_id');
             $table->string('avatar')->default(' ');
             $table->unsignedInteger('created_by');
             $table->boolean('is_banned')->default(0);

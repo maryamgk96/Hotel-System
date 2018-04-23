@@ -22,9 +22,15 @@ class FloorsController extends Controller
     public function data(){
         $floors = Floor::query();
         
+<<<<<<< HEAD
         return Datatables::of($floors) ->addColumn('actions', function ($floor) {
             return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xs btn-primary"> Edit</a>';
         })->make(true); 
+=======
+        return Datatables::of($floor) ->addColumn('actions', function ($floor) {
+            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"> Edit</a>';
+        })->rawcolumns(['actions'])->make(true); 
+>>>>>>> 995eb3dc7cd70f954667991cd833aaf2b592aaa9
     }
     
     public function create(){
