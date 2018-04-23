@@ -3,6 +3,16 @@
 <h1>Edit Room</h1>
 <br>
 <br>
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
 <div class="box-body">
     <form role="form" method="post" action="/rooms/{{$room->id}}">
