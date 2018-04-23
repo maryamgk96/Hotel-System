@@ -18,7 +18,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-       'national_id',
+        'national_id',
         'avatar',
         'created_by',
         'is_banned',
