@@ -9,7 +9,7 @@ use  App\User;
 class Floor extends Model
 {
     protected $fillable = [
-    
+
         'name',
         'number',
         'created_by',
