@@ -22,8 +22,7 @@
     $('#table').DataTable({
       processing: true,
       serverSide: true,
-      ajax: '{{ url('
-      floordata ') }}',
+      ajax: '{{ url('floordata ') }}',
       columns: [{
           data: 'number',
           name: 'number'

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreRoomRequest;
 use Yajra\Datatables\Datatables;
 use App\Room;
 use App\Floor;
@@ -33,7 +34,7 @@ class RoomsController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(StoreRoomRequest $request){
         Room::create([
             'number' => $request -> number,
             'capacity' => $request -> capacity,
@@ -54,7 +55,7 @@ class RoomsController extends Controller
         ]);
     }
 
-    public function update(Request $request,$id){
+    public function update(StoreRoomRequest $request,$id){
         $room = Room::find($id)->update([
             'number' => $request -> number,
             'capacity' => $request -> capacity,

@@ -3,6 +3,17 @@
 <br>
 <br>
 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
 <div class="box-body">
     <form role="form" method="post" action="/rooms">
         {{csrf_field()}}
@@ -11,7 +22,7 @@
 
         <div class="form-group">
             <label>Number</label>
-            <input type="number" name="number" class="form-control" placeholder="Enter Room Number">
+            <input type="text" name="number" class="form-control" placeholder="Enter Room Number">
         </div>
 
         <div class="form-group">
