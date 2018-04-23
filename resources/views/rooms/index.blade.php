@@ -28,7 +28,7 @@
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'capacity', name: 'capacity' },
-                        { data: 'price', name: 'price' },
+                        { data: 'price', name: 'price'},
                         { data: 'floor_id', name: 'floor_id' },
                         { data: 'created_by', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},

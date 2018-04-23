@@ -9,10 +9,10 @@ class Room extends Model
 {
     protected $fillable = [
         'number',
-        'created_by',
         'capacity',
         'price',
         'floor_id',
+        'created_by',
         'is_reserved',
     ];
     public function floor()
