@@ -28,7 +28,6 @@
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input type="text" class="form-control" placeholder="Name" name="name">
           </div>
-          <br>
           <label>Phone Number</label>          
           <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -69,6 +68,8 @@
             </div>
             <!-- /.col-lg-6 -->
           </div>
+      </div>
+      <!-- /.box-body -->
       </div>
       <!-- /.box-body -->
 
