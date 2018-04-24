@@ -3,8 +3,24 @@
 @section('content')
                <h2>Manage Rooms</h2>
 
-
+      
              <a href="/rooms/create"  class="btn btn-primary">Create New Room</a><br><br>
+              
+             
+             <!--
+                 alert error if someone tried to delete a reserved room  
+              -->
+              @if ($error)
+                  <div class="alert alert-danger">
+                      <ul>
+                      
+                       <li>{{ $error }}</li>
+                       
+                       </ul>
+                   </div>
+                @endif
+
+                
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>
@@ -28,9 +44,9 @@
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'capacity', name: 'capacity' },
-                        { data: 'price', name: 'price'},
-                        { data: 'floor_id', name: 'floor_id' },
-                        { data: 'created_by', name: 'created_by' },
+                        { data: 'price', name: 'price' },
+                        { data: 'floor.name', name: 'floor_id' },
+                        { data: 'user.name', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                      ]
             });

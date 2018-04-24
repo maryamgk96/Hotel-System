@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRoomRequest;
 use Yajra\Datatables\Datatables;
 use App\Room;
 use App\Floor;
+use App\User;
 
 class RoomsController extends Controller
 {
@@ -16,13 +17,18 @@ class RoomsController extends Controller
      * @return \Illuminate\View\View
      */
     public function index(){  
-        return view('rooms.index');
+        return view('rooms.index',[
+            'error' => ''
+             ]);
     }
 
     public function data(){
-        $rooms = Room::all();
+        $rooms = Room::with('user')->with('floor');
+        
         return Datatables::of($rooms) ->addColumn('actions', function ($room) {
-            return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xm btn-primary"> Edit</a>';
+            return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xm btn-primary"><i class="fa fa-edit"></i> Edit</a>
+            <form action="rooms/'.$room->id.'" 
+            onsubmit="return confirm(\'Do you really want to delete this room ?\');" method="post" >'.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
         })->rawcolumns(['actions'])->make(true); 
     }
 
@@ -62,6 +68,19 @@ class RoomsController extends Controller
             'floor_id' => $request -> floor_id,
         ]);
         
-       return redirect(route('floors.index')); 
+       return redirect(route('rooms.index')); 
+    }
+
+    public function destroy(Request $request,$id){
+        $room = Room::find($id);
+        if($room->is_reserved == 0){
+            $room->delete();
+            return redirect(route('rooms.index'));
+        }
+        else{
+            return view('rooms.index',[
+                'error' => 'This room can not be deleted , it is a reserved room '
+                 ]);
+        }    
     }
 }
