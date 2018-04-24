@@ -23,11 +23,24 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+
+
+Route::get('clients', 'ClientsController@index');
+Route::get('data', 'ClientsController@ajaxData');
+Route::get('clients/create', 'ClientsController@create');
+Route::post('clients','ClientsController@store');
+Route::get('clients/{id}/edit', 'ClientsController@edit');
+Route::put('clients/{id}', 'ClientsController@update');
+Route::delete('clients/{id}/delete', 'ClientsController@destroy');
+
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'ReservationsController@data');
-Route::get ('reservations/create','ReservationsController@create');
-Route::post('reservations','ReservationsController@store');
+Route::get('reservations/roomsdata', 'ReservationsController@show');
+Route::get('reservations/rooms', 'ReservationsController@showrooms');
+Route::get('reservations/rooms', 'ReservationsController@showrooms');
+Route::get ('reservations/create/{room_id}','ReservationsController@create');
+Route::post('reservations/{room_id}','ReservationsController@store');
 
 Auth::routes();
 
@@ -96,3 +109,18 @@ Route::delete('rooms/{id}', 'RoomsController@destroy');
 
 
 
+
+
+Route::group(['prefix' => 'clients'], function () {
+  Route::get('/login', 'ClientAuth\LoginController@showLoginForm')->name('login');
+  Route::post('/login', 'ClientAuth\LoginController@login');
+  Route::post('/logout', 'ClientAuth\LoginController@logout')->name('logout');
+
+  Route::get('/register', 'ClientAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::post('/register', 'ClientAuth\RegisterController@register');
+
+  Route::post('/password/email', 'ClientAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
+  Route::post('/password/reset', 'ClientAuth\ResetPasswordController@reset')->name('password.email');
+  Route::get('/password/reset', 'ClientAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::get('/password/reset/{token}', 'ClientAuth\ResetPasswordController@showResetForm');
+});

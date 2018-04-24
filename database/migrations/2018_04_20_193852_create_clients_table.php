@@ -1,7 +1,5 @@
 <?php
 
-
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -22,10 +20,12 @@ class CreateClientsTable extends Migration
             $table->string('avatar')->default(' ');
             $table->integer('mobile');
             $table->string('country');
+            $table->smallInteger('gender');
             $table->boolean('is_approved')->default(0);
             $table->unsignedInteger('approved_by');
-            $table->date('last_login');
-            $table->timestamps();    
+            $table->timestamp('last_login')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->rememberToken();
+            $table->timestamps();
         });
     }
 
@@ -36,6 +36,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::drop('clients');
     }
 }
