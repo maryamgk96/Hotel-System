@@ -8,6 +8,9 @@ use Yajra\Datatables\Datatables;
 use App\User;
 use App\Room;
 use App\Client;
+use Validator;
+
+
 
 class ReservationsController extends Controller
 {
@@ -34,12 +37,24 @@ class ReservationsController extends Controller
     }
     public function store(Request $request)
     {
+        $room=Room::find($request->room_id);
+        $room->is_reserved=1;
+        $room->save();
+
+        $variable=$request->no_companions<=$room->capacity;
+        Validator::make($request->all(), [
+            'paid_price' => 'required',
+            'no_companions' => 'required|in:'.$variable,
+        ], [
+            'in' => "The Number Of Companions Must Be less $room->capacity",
+        ])->validate();
        Reservation::create([
         'room_id' => $request->room_id,
         'client_id' => 1,
         'paid_price' => $request->paid_price,
         'no_companions'=>$request->no_companions,
        ]);
+    
        return redirect('reservations');
     } 
     
