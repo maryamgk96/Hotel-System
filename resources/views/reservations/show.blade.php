@@ -1,7 +1,7 @@
 @extends('admin_template')
 
 @section('content')
-               <h2>Rooms</h2>
+               <h2>Available Rooms</h2>
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>
@@ -15,7 +15,7 @@
             
          </div>
        <script>
-         $(function() {
+         $(function() { 
                $('#table').DataTable({
                processing: true,
                serverSide: true,
