@@ -24,7 +24,8 @@ class FloorsController extends Controller
     public function data(){
         $floors = Floor::with('user');  
         return Datatables::of($floors) ->addColumn('actions', function ($floor) {
-            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"> Edit</a>';
+            return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
+            <a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-danger" ><i class="fa fa-trash"></i> Delete</a>';
         })->rawcolumns(['actions'])->make(true); 
     }
     
