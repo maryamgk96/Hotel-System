@@ -32,7 +32,7 @@ class FloorsController extends Controller
     }
 
     public function store(StoreFloorRequest $request){
-        $randomId= $this-> generateFloorNumber();
+        $randojmId= $this-> generateFloorNumber();
         Floor::create([
             'number' => $randomId,
             'name' => $request->name,

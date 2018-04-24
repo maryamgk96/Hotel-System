@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Rinvex\Country\CountryLoader;
+use App\Http\Requests\StoreClientRequest;
 use App\Client;
+use App\User;
+use App\Reservation ;
 
 class ClientsController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('auth:client');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,12 +43,12 @@ class ClientsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreClientRequest $request)
     {
         Client::create([
             'name' => $request->name,
             'email'=>$request->email,
-            'password'=>$request->password,
+            'password'=>bcrypt($request->password),
             'mobile'=>$request->phone,
             'country'=>$request->country,
             'gender'=>$request->gender,
@@ -107,16 +114,32 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy(Request $request,$id){
-        Client::find($id)->delete();
+        
 
-        return redirect(route('client.index')); 
+        $res = Reservation::where('client_id', $id)->first();
+        if($res){
+            $res->delete();
+            Client::find($id)->delete();
+        }
+        else
+        {
+            Client::find($id)->delete();            
+        }
+        return redirect('/clients');
     }
 
     public function ajaxData()
     {
-        return Datatables::of(Client::query())->addColumn('actions', function ($client) {
-            return '<a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a><form action="/clients/'.$client->id.'delete/"  method="post">
-            @csrf {{method_field("DELETE")}}<button class="btn btn-danger" onclick="return confirm("are you sure?")" type="submit">delete</button></form>';
-        })->rawcolumns(['actions'])->make(true);    
+        $clients = Client::with('user');
+        return Datatables::of($clients)->addColumn('actions', function ($client) {
+            return '<a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
+            <form action="clients/'.$client->id.'/delete" 
+            onsubmit="return confirm(\'Do you really want to delete?\');" method="post" >'.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
+        })->addColumn('gender',function($client){
+            if($client->gender==0)
+            {return "Male";}
+            else{return "Female";}})
+            
+            ->rawcolumns(['actions'])->make(true);    
     }
 }
