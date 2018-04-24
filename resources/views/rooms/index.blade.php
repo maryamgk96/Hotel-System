@@ -28,13 +28,9 @@
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'capacity', name: 'capacity' },
-<<<<<<< HEAD
                         { data: 'price', name: 'price' },
-=======
-                        { data: 'price', name: 'price'},
->>>>>>> 995eb3dc7cd70f954667991cd833aaf2b592aaa9
-                        { data: 'floor_id', name: 'floor_id' },
-                        { data: 'created_by', name: 'created_by' },
+                        { data: 'floor.name', name: 'floor_id' },
+                        { data: 'user.name', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                      ]
             });

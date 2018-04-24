@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRoomRequest;
 use Yajra\Datatables\Datatables;
 use App\Room;
 use App\Floor;
+use App\User;
 
 class RoomsController extends Controller
 {
@@ -20,10 +21,10 @@ class RoomsController extends Controller
     }
 
     public function data(){
-        $rooms = Room::all();
+        $rooms = Room::with('user')->with('floor');
         
         return Datatables::of($rooms) ->addColumn('actions', function ($room) {
-            return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xm btn-primary"> Edit</a>';
+            return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xm btn-primary"><i class="fa fa-edit"> Edit</a>';
         })->rawcolumns(['actions'])->make(true); 
     }
 
