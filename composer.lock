@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "df562ac55eaf1cef6a16b2331e257cab",
+    "content-hash": "535cc04777424ba6bcd97e47ab8e4c4a",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1623,6 +1623,40 @@
             "time": "2018-01-20T00:28:24+00:00"
         },
         {
+<<<<<<< HEAD
+            "name": "rinvex/country",
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rinvex/country.git",
+                "reference": "e32228ef43f26d3b02296be9454f842c52d492f3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rinvex/country/zipball/e32228ef43f26d3b02296be9454f842c52d492f3",
+                "reference": "e32228ef43f26d3b02296be9454f842c52d492f3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Rinvex\\Country\\": "src/"
+                }
+=======
             "name": "spatie/laravel-permission",
             "version": "2.12.0",
             "source": {
@@ -1662,6 +1696,7 @@
                 "files": [
                     "src/helpers.php"
                 ]
+>>>>>>> 4c049ba62f0824ecb1616e47f196f6bbe0030ca9
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1669,6 +1704,41 @@
             ],
             "authors": [
                 {
+<<<<<<< HEAD
+                    "name": "Rinvex LLC",
+                    "email": "help@rinvex.com",
+                    "homepage": "https://rinvex.com"
+                },
+                {
+                    "name": "Abdelrahman Omran",
+                    "email": "me@omranic.com",
+                    "homepage": "https://omranic.com",
+                    "role": "Project Lead"
+                },
+                {
+                    "name": "The Generous Laravel Community",
+                    "homepage": "https://github.com/rinvex/country/contributors"
+                }
+            ],
+            "description": "Rinvex Country is a simple and lightweight package for retrieving country details with flexibility. A whole bunch of data including name, demonym, capital, iso codes, dialling codes, geo data, currencies, flags, emoji, and other attributes for all 250 countries worldwide at your fingertips.",
+            "homepage": "https://rinvex.com",
+            "keywords": [
+                "Flexible",
+                "Simple",
+                "countries",
+                "country",
+                "currencies",
+                "demonym",
+                "dialling",
+                "emoji",
+                "flags",
+                "geographic",
+                "languages",
+                "rinvex",
+                "svg"
+            ],
+            "time": "2017-03-07T18:40:20+00:00"
+=======
                     "name": "Freek Van der Herten",
                     "email": "freek@spatie.be",
                     "homepage": "https://spatie.be",
@@ -1685,6 +1755,7 @@
                 "spatie"
             ],
             "time": "2018-04-22T22:06:50+00:00"
+>>>>>>> 4c049ba62f0824ecb1616e47f196f6bbe0030ca9
         },
         {
             "name": "swiftmailer/swiftmailer",
