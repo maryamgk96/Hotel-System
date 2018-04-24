@@ -81,10 +81,6 @@ class RoomsController extends Controller
             return view('rooms.index',[
                 'error' => 'This room can not be deleted , it is a reserved room '
                  ]);
-        }
-        
-        
-
-         
+        }    
     }
 }

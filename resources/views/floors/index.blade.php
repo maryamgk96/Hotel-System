@@ -5,6 +5,21 @@
 
 
              <a href="/floors/create"  class="btn btn-primary">Create New Floor</a><br><br>
+
+             <!--
+                 alert error if someone tried to delete a reserved room  
+              -->
+              @if ($error)
+                  <div class="alert alert-danger">
+                      <ul>
+                      
+                       <li>{{ $error }}</li>
+                       
+                       </ul>
+                   </div>
+                @endif
+
+                
             <table class="table table-bordered" id="table">
                <thead>
                   <tr>

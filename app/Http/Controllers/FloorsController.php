@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreFloorRequest;
 use Yajra\Datatables\Datatables;
 use App\Floor;
+use App\Room;
 use App\User;
 
 
@@ -18,14 +19,17 @@ class FloorsController extends Controller
      */
     public function index(){ 
     
-        return view('floors.index');
+        return view('floors.index',[
+            'error' => ''
+        ]);
     }
     
     public function data(){
         $floors = Floor::with('user');  
         return Datatables::of($floors) ->addColumn('actions', function ($floor) {
             return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
-            <a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-danger" ><i class="fa fa-trash"></i> Delete</a>';
+            <form action="floors/'.$floor->id.'" 
+            onsubmit="return confirm(\'Do you really want to delete this floor ?\');" method="post" >'.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
         })->rawcolumns(['actions'])->make(true); 
     }
     
@@ -77,8 +81,15 @@ class FloorsController extends Controller
 
 
     public function destroy(Request $request,$id){
-        Floor::find($id)->delete();
 
-        return redirect(route('floors.index')); 
+        if(!Room::where('floor_id', $id)->exists()){
+            Floor::find($id)->delete();
+            return redirect(route('floors.index'));
+        }
+        else{
+            return view('floors.index',[
+                'error' => 'This floor can not be deleted , it has rooms associated to it'
+                 ]);
+        }
     }
 }
