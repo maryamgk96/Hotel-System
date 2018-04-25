@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2f2f9a8b542e80bc8235668b7ffbbb30",
+    "content-hash": "c275337c02c75fe669838a41cb474b8f",
     "packages": [
         {
             "name": "cybercog/laravel-ban",
