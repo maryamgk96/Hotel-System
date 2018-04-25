@@ -36,7 +36,6 @@ class AjaxController extends Controller
             return Datatables::of($receptionists) ->addColumn('actions', function ($receptionist) {
                 if(Auth::user()->id == $receptionist->created_by)
                 {
-                  if($receptionist->created_by) 
                   return view('receptionists.action',['id'=>$receptionist->id,'banFlag'=>$receptionist->is_banned]);
                 }
                 else
