@@ -13,10 +13,7 @@ use Auth;
 class ClientsController extends Controller
 {
     
-    public function __construct()
-    {
-        $this->middleware('auth:client');
-    }
+   
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +21,7 @@ class ClientsController extends Controller
      */
     public function index()
     {   
+        //dd(Auth::guard('client')->user() );
         return view('clients.index');
     }
 
@@ -133,9 +131,9 @@ class ClientsController extends Controller
     {
         $clients = Client::with('user');
         return Datatables::of($clients)->addColumn('actions', function ($client) {
-            return '<a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
-            <form action="clients/'.$client->id.'/delete" 
-            onsubmit="return confirm(\'Do you really want to delete?\');" method="post" >'.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
+            return '<form action="clients/'.$client->id.'/delete" 
+            onsubmit="return confirm(\'Do you really want to delete?\');" method="post" ><a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
+            '.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
         })->addColumn('gender',function($client){
             if($client->gender==0)
             {return "Male";}
