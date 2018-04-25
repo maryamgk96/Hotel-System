@@ -41,12 +41,11 @@ class ReservationsController extends Controller
         $room->is_reserved=1;
         $room->save();
 
-        $variable=$request->no_companions<=$room->capacity;
         Validator::make($request->all(), [
             'paid_price' => 'required',
-            'no_companions' => 'required|in:'.$variable,
+            'no_companions' => 'required|in:1,'.$room->capacity,
         ], [
-            'in' => "The Number Of Companions Must Be less $room->capacity",
+            'in' => "The Number Of Companions Must Be less Than Or Equal $room->capacity",
         ])->validate();
        Reservation::create([
         'room_id' => $request->room_id,
