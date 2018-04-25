@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreRoomRequest;
+use App\Http\Requests\UpdateRoomRequest;
 use Yajra\Datatables\Datatables;
 use App\Room;
 use App\Floor;
@@ -27,7 +28,7 @@ class RoomsController extends Controller
         
         return Datatables::of($rooms) ->addColumn('actions', function ($room) {
             return '<a href="/rooms/'.$room->id.'/edit" class="btn btn-xm btn-primary"><i class="fa fa-edit"></i> Edit</a>
-            <form action="rooms/'.$room->id.'" 
+            <form action="/rooms/'.$room->id.'" 
             onsubmit="return confirm(\'Do you really want to delete this room ?\');" method="post" >'.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
         })->rawcolumns(['actions'])->make(true); 
     }
@@ -60,7 +61,7 @@ class RoomsController extends Controller
         ]);
     }
 
-    public function update(StoreRoomRequest $request,$id){
+    public function update(UpdateRoomRequest $request,$id){
         $room = Room::find($id)->update([
             'number' => $request -> number,
             'capacity' => $request -> capacity,

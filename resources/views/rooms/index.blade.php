@@ -42,7 +42,7 @@
                serverSide: true,
                ajax: '{{ url('roomdata') }}',
                columns: [
-                        { data: 'id', name: 'id' },
+                        { data: 'number', name: 'number' },
                         { data: 'capacity', name: 'capacity' },
                         { data: 'price', name: 'price' },
                         { data: 'floor.name', name: 'floor_id' },

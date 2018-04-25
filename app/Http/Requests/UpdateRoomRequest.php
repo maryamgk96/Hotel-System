@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreRoomRequest extends FormRequest
+class UpdateRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StoreRoomRequest extends FormRequest
     public function rules()
     {
         return [
-            'number' => 'required|numeric|digits:4|unique:rooms',
+            'number' => 'required|numeric|min:4|unique:rooms,number,'.$this->id,
             'capacity' => 'required|numeric',
             'price' => 'required|numeric'
         ];

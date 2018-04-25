@@ -28,7 +28,7 @@ class FloorsController extends Controller
         $floors = Floor::with('user');  
         return Datatables::of($floors) ->addColumn('actions', function ($floor) {
             return '<a href="/floors/'.$floor->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
-            <form action="floors/'.$floor->id.'" 
+            <form action="/floors/'.$floor->id.'" 
             onsubmit="return confirm(\'Do you really want to delete this floor ?\');" method="post" >'.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
         })->rawcolumns(['actions'])->make(true); 
     }
@@ -38,7 +38,7 @@ class FloorsController extends Controller
     }
 
     public function store(StoreFloorRequest $request){
-        $randojmId= $this-> generateFloorNumber();
+        $randomId= $this-> generateFloorNumber();
         Floor::create([
             'number' => $randomId,
             'name' => $request->name,
