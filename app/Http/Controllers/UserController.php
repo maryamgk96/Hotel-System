@@ -26,7 +26,16 @@ class UserController extends Controller
 
     }
     public function create($role)
-    {   
+    {
+        $role=substr($role, 0, -1);
+        if($role == "manager")
+        {
+            return view('managers.create');
+        }
+        else
+        {
+            return view('receptionists.create');
+        }    
     }
     public function store($role)
     {   
