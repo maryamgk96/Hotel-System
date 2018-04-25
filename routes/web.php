@@ -100,12 +100,12 @@ Route::delete('rooms/{id}', 'RoomsController@destroy');
 
 
 
-Route::group(['prefix' => 'clients'], function () {
-  Route::get('/login', 'ClientAuth\LoginController@showLoginForm')->name('login');
+Route::group(['prefix' => 'client'], function () {
+  Route::get('/login', 'ClientAuth\LoginController@showLoginForm')->name('clientlogin');
   Route::post('/login', 'ClientAuth\LoginController@login');
-  Route::post('/logout', 'ClientAuth\LoginController@logout')->name('logout');
+  Route::post('/logout', 'ClientAuth\LoginController@logout')->name('clientlogout');
 
-  Route::get('/register', 'ClientAuth\RegisterController@showRegistrationForm')->name('register');
+  Route::get('/register', 'ClientAuth\RegisterController@showRegistrationForm')->name('clientregister');
   Route::post('/register', 'ClientAuth\RegisterController@register');
 
   Route::post('/password/email', 'ClientAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');

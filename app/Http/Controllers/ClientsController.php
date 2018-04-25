@@ -8,6 +8,7 @@ use App\Http\Requests\StoreClientRequest;
 use App\Client;
 use App\User;
 use App\Reservation ;
+use Auth;
 
 class ClientsController extends Controller
 {
@@ -22,7 +23,7 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
         return view('clients.index');
     }
 
