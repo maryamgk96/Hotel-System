@@ -21,5 +21,7 @@ class RolesTableSeeder extends Seeder
         $role=Role::create(['name' => 'receptionist']);
         $role->givePermissionTo(['client-list']);
 
+        $role=Role::create(['name' => 'client']);
+
     }
 }
