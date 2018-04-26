@@ -39,6 +39,7 @@ class User extends Authenticatable implements BannableContract
           $this->attributes['avatar'] = "/storage".str_replace("public", "", $value);
     }
 
+
     /**
      * The attributes that should be hidden for arrays.
      *
