@@ -5,6 +5,7 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Rinvex\Country\CountryLoader;
 use App\Http\Requests\StoreClientRequest;
+use App\Notifications\ClientApproved;
 use App\Client;
 use App\User;
 use App\Reservation ;
@@ -21,7 +22,7 @@ class ClientsController extends Controller
      */
     public function index()
     {   
-        //dd(Auth::guard('client')->user() );
+        
         return view('clients.index');
     }
 
@@ -127,18 +128,14 @@ class ClientsController extends Controller
         return redirect('/clients');
     }
 
-    public function ajaxData()
-    {
-        $clients = Client::with('user');
-        return Datatables::of($clients)->addColumn('actions', function ($client) {
-            return '<form action="clients/'.$client->id.'/delete" 
-            onsubmit="return confirm(\'Do you really want to delete?\');" method="post" ><a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
-            '.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
-        })->addColumn('gender',function($client){
-            if($client->gender==0)
-            {return "Male";}
-            else{return "Female";}})
-            
-            ->rawcolumns(['actions'])->make(true);    
+
+    public function approve($id){
+      $client=  client::find($id);
+      $client->update(['is_approved' => 1,'approved_by'=>Auth::user()->id]);
+      $client->notify(new ClientApproved($client));      
+        return redirect('/clients');
+
+
     }
+   
 }
