@@ -115,14 +115,15 @@ class AjaxController extends Controller
     public function reservationDataAjax(){
         $clientid= Auth::guard('client')->user()->id;
         $reservations = Reservation::all();
-       foreach ($reservations as $reservation){ 
-        if($reservation->client_id==$clientid){
+       foreach ($reservations as $reservation)
+    { 
+        if($reservation->client_id==$clientid)
+        {
             $res=[];
             array_push($res,$reservation);
-            $reservations = $res;
         }
-        return Datatables::of($reservations) ->make(true); 
-        }
+    }
+        return Datatables::of($res) ->make(true); 
     }
 
     public function showRoomAjaxData()
