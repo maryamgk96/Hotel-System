@@ -15,7 +15,8 @@
                      <th>Phone</th>
                      <th>Gender</th>
                      <th>is_approved</th>
-                     <th>approved_by</th>                     
+                     <th>approved_by</th>                                                               
+                     <th>Approved</th>                                                               
                      <th>actions</th>
                      
                   </tr>
@@ -36,7 +37,8 @@
                         { data: 'mobile',name: 'mobile' },
                         { data: 'gender', name: 'gender' },
                         { data: 'is_approved', name: 'is_approved' }, 
-                        { data: 'user.name', name: 'approved_by' },                                                                       
+                        { data: 'user.name', name: 'approved_by' }, 
+                        { data: 'approve', name: 'approve', orderable: false, searchable: false },                                                                                                                                                                     
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                         
                         

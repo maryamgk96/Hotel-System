@@ -9,6 +9,7 @@ use Yajra\Datatables\Datatables;
 use App\Room;
 use App\Floor;
 use App\User;
+use App\Client;
 use Auth;
 
 class AjaxController extends Controller
@@ -68,6 +69,7 @@ class AjaxController extends Controller
         
     }
 
+
     public function floorsDataAjax(){
         $user = Auth::user(); 
         $floors = Floor::with('user');
@@ -91,6 +93,38 @@ class AjaxController extends Controller
         
     }
 
-    
+
+    public function clientsDataAjax()
+    {
+        $clients = Client::with('user');
+        return Datatables::of($clients)->addColumn('actions', function ($client) {
+            return '<form action="clients/'.$client->id.'/delete" 
+            onsubmit="return confirm(\'Do you really want to delete?\');" method="post" ><a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
+            '.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
+        })->addColumn('gender',function($client){
+            if($client->gender==0)
+            {return "Male";}
+            else{return "Female";}})->addColumn('approve',function($client){
+              return  '<a href="/clients/'.$client->id.'/approve" class="btn btn-xm btn-primary" ><i class="fa fa-checkmark"></i>Approve</a>';
+            })
+            
+            ->rawcolumns(['actions','approve'])->make(true);    
+    }
+
+    public function reservationDataAjax(){
+        $client= Auth::guard('client')->user();
+        $reservations = Reservation::query()->with('client');
+        return Datatables::of($reservations) ->make(true); 
+    }
+
+    public function showRoomAjaxData()
+    {
+        $rooms=Room::all()->where("is_reserved",'0');
+        return Datatables::of($rooms) ->addColumn('actions', function ($room) {
+            return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
+        })->rawcolumns(['actions'])->make(true);       
+    }
+
+
 
 }

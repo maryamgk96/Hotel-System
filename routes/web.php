@@ -24,29 +24,45 @@ Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
-
 Route::get('clients', 'ClientsController@index');
-Route::get('data', 'ClientsController@ajaxData');
+Route::get('data', 'AjaxController@clientsData');
 Route::get('clients/create', 'ClientsController@create');
 Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
 Route::delete('clients/{id}/delete', 'ClientsController@destroy');
+Route::get('clients/{id}/approve','ClientsController@approve');
+
+
 
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
-Route::get('reservationdata', 'ReservationsController@data');
-Route::get('reservations/roomsdata', 'ReservationsController@show');
-Route::get('reservations/rooms', 'ReservationsController@showrooms');
-Route::get('reservations/rooms', 'ReservationsController@showrooms');
+Route::get('reservationdata', 'AjaxController@reservationDataAjax');
+Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
+Route::get('reservations/rooms', 'ReservationsController@show');
 Route::get ('reservations/create/{room_id}','ReservationsController@create');
 Route::post('reservations/{room_id}','ReservationsController@store');
+//payment 
+Route::post ( 'reservations/{room_id}/charge', function (Request $request) {
+	\Stripe\Stripe::setApiKey ( 'sk_test_yourSecretkey' );
+	try {
+		\Stripe\Charge::create ( array (
+				"amount" => 300 * 100,
+				"currency" => "usd",
+				"source" => $request->input ( 'stripeToken' ), // obtained with Stripe.js
+				"description" => "Test payment." 
+		) );
+		Session::flash ( 'success-message', 'Payment done successfully !' );
+		return Redirect::back ();
+	} catch ( \Exception $e ) {
+		Session::flash ( 'fail-message', "Error! Please Try again." );
+		return Redirect::back ();
+	}
+} );
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 
 //UserController Routes
@@ -119,8 +135,8 @@ Route::group(['prefix' => 'client'], function () {
   Route::get('/register', 'ClientAuth\RegisterController@showRegistrationForm')->name('clientregister');
   Route::post('/register', 'ClientAuth\RegisterController@register');
 
-  Route::post('/password/email', 'ClientAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'ClientAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'ClientAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::post('/password/email', 'ClientAuth\ForgotPasswordController@sendResetLinkEmail')->name('clientpassword.request');
+  Route::post('/password/reset', 'ClientAuth\ResetPasswordController@reset')->name('clientpassword.email');
+  Route::get('/password/reset', 'ClientAuth\ForgotPasswordController@showLinkRequestForm')->name('clientpassword.reset');
   Route::get('/password/reset/{token}', 'ClientAuth\ResetPasswordController@showResetForm');
 });
