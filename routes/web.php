@@ -24,7 +24,6 @@ Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
-
 Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients');
 Route::get('clientsdata', 'AjaxController@clientsDataAjax');
@@ -35,8 +34,6 @@ Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
 Route::delete('clients/{id}/delete', 'ClientsController@destroy');
 Route::get('clients/{id}/approve','ClientsController@approve');
-
-
 
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
@@ -49,8 +46,6 @@ Route::post('reservations/{room_id}','ReservationsController@store');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 
 //UserController Routes
@@ -69,11 +64,6 @@ Route::post(
     '{role}',
     'UserController@store'
 )->name('users.store')->where('role', 'managers|receptionists');
-
-Route::get(
-    '{role}/{user}',
-    'UserController@show'
-)->name('users.show')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager','forbid-banned-user');
 
 Route::get(
     '{role}/{user}/edit',

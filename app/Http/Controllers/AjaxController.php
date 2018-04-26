@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Yajra\Datatables\Datatables;
 use App\Room;
 use App\Floor;
+use App\Reservation;
 use App\User;
 use App\Client;
 use Auth;
@@ -144,11 +145,17 @@ class AjaxController extends Controller
     
 
     public function reservationDataAjax(){
-        $client= Auth::client(); 
-        $reservations = Reservation::query()->with('client');
+        $clientid= Auth::guard('client')->user()->id;
+        $reservations = Reservation::all();
+       foreach ($reservations as $reservation){ 
+        if($reservation->client_id==$clientid){
+            $res=[];
+            array_push($res,$reservation);
+            $reservations = $res;
+        }
         return Datatables::of($reservations) ->make(true); 
+        }
     }
-
 
     public function showRoomAjaxData()
     {

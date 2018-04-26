@@ -7,6 +7,10 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Yajra\Datatables\Datatables;
 use App\User;
+use App\Http\Requests\StoreUserRequest;
+use Auth;
+//use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -26,13 +30,61 @@ class UserController extends Controller
 
     }
     public function create($role)
-    {   
+    {
+        $role=substr($role, 0, -1);
+        if($role == "manager")
+        {
+            return view('managers.create');
+        }
+        else
+        {
+            return view('receptionists.create');
+        }    
     }
-    public function store($role)
-    {   
-    }
-    public function show($role,$id)
-    {   
+    public function store($role,StoreUserRequest $request)
+    {  
+        $role=substr($role, 0, -1);
+        if($role == "manager")
+        {
+            if( $request->file('avatar'))
+            {
+              $path = $request->file('avatar')->store('public');
+            }
+            else
+              $path = "";
+              
+            $newManager=User::create([
+                'email' => $request->email,
+                'name' => $request->name,
+                'password' => bcrypt($request->password),
+                'national_id' => $request->national_id,
+                'created_by' =>Auth::user()->id ,
+                'avatar' => $path
+            ]);
+            $newManager->assignRole('manager');
+            return redirect('managers');
+        }
+        else
+        {   
+            if( $request->file('avatar'))
+            {
+              $path = $request->file('avatar')->store('public');
+            }
+            else
+              $path = "";
+              
+            $newReceptionist=User::create([
+                'email' => $request->email,
+                'name' => $request->name,
+                'password' => bcrypt($request->password),
+                'national_id' => $request->national_id,
+                'created_by' =>Auth::user()->id ,
+                'avatar' => $path
+            ]);
+            $newReceptionist->assignRole('receptionist');
+            return redirect('receptionists');
+            
+        }  
     }
     public function edit($role,$id)
     {
