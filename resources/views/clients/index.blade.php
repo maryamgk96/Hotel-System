@@ -45,6 +45,29 @@
             });
          });
 
+         
+    
+         
+         $(document).on('click', '.delete', function(){
+        var id = $(this).attr('id');
+        if(confirm("Are you sure you want to Delete this client?"))
+        {
+            $.ajax({
+                url:"{{route('removeclient')}}",
+                type: 'POST',
+                data: {'_token':'{{csrf_token()}}','_method':'DELETE',id:id},
+                success:function()
+                {   
+                    
+                    $('#table').DataTable().ajax.reload();
+                }
+            })
+        }
+        else
+        {
+            return false;
+        }
+    }); 
         
          </script>
  @endsection

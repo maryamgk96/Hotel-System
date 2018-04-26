@@ -32,8 +32,8 @@ Route::get('clients/create', 'ClientsController@create');
 Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
-Route::delete('clients/{id}/delete', 'ClientsController@destroy');
 Route::get('clients/{id}/approve','ClientsController@approve');
+Route::delete('clients/delete', 'ClientsController@destroy')->name('removeclient');
 
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');

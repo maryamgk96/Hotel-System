@@ -116,9 +116,9 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request,$id){
+    public function destroy(Request $request){
         
-
+        $id = $request->input('id');
         $res = Reservation::where('client_id', $id)->first();
         if($res){
             $res->delete();
@@ -128,7 +128,7 @@ class ClientsController extends Controller
         {
             Client::find($id)->delete();            
         }
-        return redirect('/clients');
+       
     }
 
 
