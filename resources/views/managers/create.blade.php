@@ -1,7 +1,7 @@
 @extends('admin_template')
 
 @section('content')
-<h1>Create new Client</h1><br><br>
+<h1>Create new Manager</h1><br><br>
 
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -13,7 +13,7 @@
     </div>
 @endif
 
-<form role="form" method="post" action="/clients">
+<form role="form" method="POST" action="/managers"  enctype="multipart/form-data">
     @csrf
 
     <div class="box-body">
