@@ -53,7 +53,7 @@
         if(confirm("Are you sure you want to Delete this client?"))
         {
             $.ajax({
-                url:"{{route('removeclient')}}",
+                url:"{{route('client.delete')}}",
                 type: 'POST',
                 data: {'_token':'{{csrf_token()}}','_method':'DELETE',id:id},
                 success:function()

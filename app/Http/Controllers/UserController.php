@@ -9,7 +9,7 @@ use Yajra\Datatables\Datatables;
 use App\User;
 use App\Http\Requests\StoreUserRequest;
 use Auth;
-//use App\Http\Requests\UpdateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -88,14 +88,56 @@ class UserController extends Controller
     }
     public function edit($role,$id)
     {
-
+        $role=substr($role, 0, -1);
+        $user = User::find($id);
+        if($role == "manager")
+        {
+            return view('managers.edit',['manager' => $user]);
+        }
+        else
+        {
+            return view('receptionists.edit',['receptionist' => $user]);
+        } 
     
     }
-    public function update($role,$id)
+    public function update($role,$id,UpdateUserRequest $request)
     {
+        $role=substr($role, 0, -1);
+        $user = User::find($id);
+        if($role == "manager")
+        {
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->national_id = $request->national_id;
+            if($request->avatar)
+            {
+                Storage::delete(str_replace("/storage", "public", $user->avatar));
+                $path = $request->file('avatar')->store('public');  
+                $user->avatar = $path;
+            }
+            $user->save();
+            return redirect('managers');
+        }
+        else
+        {   
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->national_id = $request->national_id;
+            if($request->avatar)
+            {
+                Storage::delete(str_replace("/storage", "public", $user->avatar));
+                $path = $request->file('avatar')->store('public');  
+                $user->avatar = $path;
+            }
+            $user->save();
+            return redirect('receptionists');
+            
+        } 
     }
-    public function destroy($role,$id)
+    public function destroy($id)
     {   
+            User::find($id)->delete();
+
     }
     public function ban($id)
     {   

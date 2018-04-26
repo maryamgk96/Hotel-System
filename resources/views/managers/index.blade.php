@@ -16,7 +16,6 @@
                </thead>
             </table>
             
-         </div>
        <script>
          $(function() {
                $('#table').DataTable({
@@ -31,5 +30,22 @@
                      ]
             });
          });
+
+  $(document).on('click','.delete',function(){
+  let id = $(this).attr('target');
+  let conf = confirm("Are You Sure You Want To Delete That Record?");
+  if(conf){
+  $.ajax({
+      url:`users/${id}`,
+      type: 'POST',
+      data:{
+          '_token' : '{{csrf_token()}}',
+          '_method':'DELETE'
+      },success: function(){
+            $('#table').DataTable().ajax.reload();
+    }});
+  }
+});
+
          </script>
  @endsection
