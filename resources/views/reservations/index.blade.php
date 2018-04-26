@@ -9,7 +9,7 @@
     <tr>
     <th scope="col">ID</th>
       <th scope="col">Room</th>
-      <th scope="col">Paid Price</th>
+      <th scope="col">Paid Price In Dollars</th>
       <th scope="col">Number Of Companions</th>
     </tr>
   </thead>
