@@ -13,6 +13,7 @@ use App\User;
 use App\Client;
 use Auth;
 
+
 class AjaxController extends Controller
 {
     public function managersDataAjax()
@@ -146,16 +147,9 @@ class AjaxController extends Controller
 
     public function reservationDataAjax(){
         $clientid= Auth::guard('client')->user()->id;
-        $reservations = Reservation::all();
-       foreach ($reservations as $reservation)
-    { 
-        if($reservation->client_id==$clientid)
-        {
-            $res=[];
-            array_push($res,$reservation);
-        }
-    }
-        return Datatables::of($res) ->make(true); 
+        $reservations = Reservation::where('client_id',$clientid);
+        return Datatables::of($reservations) ->make(true); 
+
     }
 
     public function showRoomAjaxData()
