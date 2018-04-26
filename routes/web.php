@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 //manage floors routes
 Route::get('floors', 'FloorsController@index')->name('floors.index');
-Route::get('floordata', 'FloorsController@data');
+Route::get('getFloorsData', 'AjaxController@floorsDataAjax');
 Route::get('floors/create', 'FloorsController@create');
 Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
@@ -100,7 +100,7 @@ Route::get(
 
 //manage rooms routes
 Route::get('rooms', 'RoomsController@index')->name('rooms.index');
-Route::get('roomdata', 'RoomsController@data');
+Route::get('getRoomsData', 'AjaxController@roomsDataAjax');
 Route::get('rooms/create', 'RoomsController@create');
 Route::post('rooms', 'RoomsController@store');
 Route::get('rooms/{id}/edit', 'RoomsController@edit');
