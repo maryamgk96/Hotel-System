@@ -111,7 +111,7 @@ class UserController extends Controller
             $user->national_id = $request->national_id;
             if($request->avatar)
             {
-                Storage::delete($user->avatar);
+                Storage::delete(str_replace("/storage", "public", $user->avatar));
                 $path = $request->file('avatar')->store('public');  
                 $user->avatar = $path;
             }
@@ -125,7 +125,7 @@ class UserController extends Controller
             $user->national_id = $request->national_id;
             if($request->avatar)
             {
-                Storage::delete($user->avatar);
+                Storage::delete(str_replace("/storage", "public", $user->avatar));
                 $path = $request->file('avatar')->store('public');  
                 $user->avatar = $path;
             }
@@ -134,8 +134,10 @@ class UserController extends Controller
             
         } 
     }
-    public function destroy($role,$id)
+    public function destroy($id)
     {   
+            User::find($id)->delete();
+
     }
     public function ban($id)
     {   

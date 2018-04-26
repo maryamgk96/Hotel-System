@@ -55,6 +55,7 @@ Route::get(
 )->name('users.index')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('getManagersData', 'AjaxController@managersDataAjax');
 Route::get('getReceptionistsData', 'AjaxController@receptionistsDataAjax');
+Route::get('deleteData/{id}', 'AjaxController@managersDataAjax');
 Route::get(
     '{role}/create',
     'UserController@create'
@@ -76,9 +77,9 @@ Route::put(
 )->name('users.update')->where('role', 'managers|receptionists');
 
 Route::delete(
-    '{role}/{user}',
+    'users/{user}',
     'UserController@destroy'
-)->name('users.destroy')->where('role', 'managers|receptionists');
+)->name('users.destroy');
 
 Route::get(
     'ban/{user}',
