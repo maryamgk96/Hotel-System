@@ -116,8 +116,8 @@ Route::group(['prefix' => 'client'], function () {
   Route::get('/register', 'ClientAuth\RegisterController@showRegistrationForm')->name('clientregister');
   Route::post('/register', 'ClientAuth\RegisterController@register');
 
-  Route::post('/password/email', 'ClientAuth\ForgotPasswordController@sendResetLinkEmail')->name('password.request');
-  Route::post('/password/reset', 'ClientAuth\ResetPasswordController@reset')->name('password.email');
-  Route::get('/password/reset', 'ClientAuth\ForgotPasswordController@showLinkRequestForm')->name('password.reset');
+  Route::post('/password/email', 'ClientAuth\ForgotPasswordController@sendResetLinkEmail')->name('clientpassword.request');
+  Route::post('/password/reset', 'ClientAuth\ResetPasswordController@reset')->name('clientpassword.email');
+  Route::get('/password/reset', 'ClientAuth\ForgotPasswordController@showLinkRequestForm')->name('clientpassword.reset');
   Route::get('/password/reset/{token}', 'ClientAuth\ResetPasswordController@showResetForm');
 });
