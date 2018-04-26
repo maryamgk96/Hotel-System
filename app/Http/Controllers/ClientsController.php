@@ -22,7 +22,7 @@ class ClientsController extends Controller
      */
     public function index()
     {   
-        //dd(Auth::guard('client')->user() );
+       
         return view('clients.index');
     }
 
@@ -52,7 +52,6 @@ class ClientsController extends Controller
             'mobile'=>$request->phone,
             'country'=>$request->country,
             'gender'=>$request->gender,
-            'approved_by'=>1,
             
         ]);
         return redirect('/clients');
@@ -136,6 +135,12 @@ class ClientsController extends Controller
         return redirect('/clients');
 
 
+    }
+
+
+    public function showMyClients(){
+
+        return view('clients.myClients');
     }
    
 }

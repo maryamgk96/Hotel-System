@@ -95,21 +95,53 @@ class AjaxController extends Controller
 
 
     public function clientsDataAjax()
-    {
+    {    
+        $user = Auth::user(); 
+        if($user->hasAnyRole(['manager','admin']))
+        {
         $clients = Client::with('user');
-        return Datatables::of($clients)->addColumn('actions', function ($client) {
-            return '<form action="clients/'.$client->id.'/delete" 
-            onsubmit="return confirm(\'Do you really want to delete?\');" method="post" ><a href="/clients/'.$client->id.'/edit" class="btn btn-xm btn-primary" ><i class="fa fa-edit"></i> Edit</a>
-            '.csrf_field().method_field("Delete").'<input name="_method" value="delete" type="submit" class="btn btn-danger" /></form>';
-        })->addColumn('gender',function($client){
+        return Datatables::of($clients)
+        ->addColumn('actions', function ($client) {
+            return view('clients.action',[ 'id' => $client -> id ,'approvedFlag'=>$client->is_approved]);
+        })
+        ->addColumn('gender',function($client){
             if($client->gender==0)
             {return "Male";}
-            else{return "Female";}})->addColumn('approve',function($client){
-              return  '<a href="/clients/'.$client->id.'/approve" class="btn btn-xm btn-primary" ><i class="fa fa-checkmark"></i>Approve</a>';
-            })
+            else{return "Female";}})
             
-            ->rawcolumns(['actions','approve'])->make(true);    
+            ->rawcolumns(['actions'])->make(true);    
+        }
+        else
+        {
+            
+            $clients=Client::where('is_approved',0);
+           
+            return Datatables::of($clients)
+        ->addColumn('actions', function ($client) {
+            return view('clients.action',[ 'id' => $client -> id ,'approvedFlag'=>$client->is_approved]);
+        })
+        ->addColumn('gender',function($client){
+            if($client->gender==0)
+            {return "Male";}
+            else{return "Female";}})
+            
+            ->rawcolumns(['actions'])->make(true);
+        }
     }
+
+    public function approvedClients()
+    {    $user = Auth::user(); 
+        $clients=Client::where('approved_by',$user->id);
+           
+            return Datatables::of($clients)
+        ->addColumn('gender',function($client){
+            if($client->gender==0)
+            {return "Male";}
+            else{return "Female";}})
+            
+            ->make(true);
+    }
+    
 
     public function reservationDataAjax(){
         $client= Auth::client(); 
