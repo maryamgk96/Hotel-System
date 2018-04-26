@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Rinvex\Country\CountryLoader;
 use App\Http\Requests\StoreClientRequest;
 use App\Notifications\ClientApproved;
+use Illuminate\Support\Facades\Cache;
 use App\Client;
 use App\User;
 use App\Reservation ;
@@ -33,7 +34,10 @@ class ClientsController extends Controller
      */
     public function create()
     {   
-        $countries = countries();
+        $countries =  Cache::rememberForever('countries', function() {
+            return countries();
+        });
+        
         return view('clients.create',compact('countries'));
     }
 

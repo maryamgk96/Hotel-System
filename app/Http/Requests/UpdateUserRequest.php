@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreClientRequest extends FormRequest
+class UpdateUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +23,13 @@ class StoreClientRequest extends FormRequest
      */
     public function rules()
     {
+        $id = $this->route('user');
         return [
-            'name' => 'required|min:3',
-            'email' => 'email|required|unique:clients',
-            'password'=> 'required|min:5',
-            'phone'=>'required|min:6|max:12',
-            'country'=>'required',
-            'gender'=>'required'
-            
+            'national_id' => 'required|unique:users,national_id,'.$id,
+            'email' => 'required|unique:users,email,'.$id,
+            'name' => 'required',
+            'password' => 'min:6',
+            'avatar' => 'mimes:jpeg,png'
         ];
     }
 }
