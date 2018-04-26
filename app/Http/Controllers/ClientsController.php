@@ -22,7 +22,7 @@ class ClientsController extends Controller
      */
     public function index()
     {   
-        //dd(Auth::guard('client')->user() );
+        
         return view('clients.index');
     }
 
