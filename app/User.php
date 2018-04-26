@@ -31,6 +31,13 @@ class User extends Authenticatable implements BannableContract
     {
         return $this->belongsTo(User::class,'created_by');
     }
+    public function setAvatarAttribute($value)
+    {
+        if($value == "")
+          $this->attributes['avatar'] = "/storage/default-profile.png";
+        else
+          $this->attributes['avatar'] = "/storage".str_replace("public", "", $value);
+    }
 
     /**
      * The attributes that should be hidden for arrays.
