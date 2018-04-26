@@ -94,11 +94,10 @@ class AjaxController extends Controller
 
     
     public function reservationDataAjax(){
-        $client= Auth::client(); 
+        $client= Auth::guard('client')->user();
         $reservations = Reservation::query()->with('client');
         return Datatables::of($reservations) ->make(true); 
     }
-
 
     public function showRoomAjaxData()
     {
@@ -107,6 +106,5 @@ class AjaxController extends Controller
             return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
         })->rawcolumns(['actions'])->make(true);       
     }
-
 
 }

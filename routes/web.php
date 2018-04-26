@@ -24,7 +24,6 @@ Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
-
 Route::get('clients', 'ClientsController@index');
 Route::get('data', 'ClientsController@ajaxData');
 Route::get('clients/create', 'ClientsController@create');
@@ -40,12 +39,27 @@ Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
 Route::get('reservations/rooms', 'ReservationsController@show');
 Route::get ('reservations/create/{room_id}','ReservationsController@create');
 Route::post('reservations/{room_id}','ReservationsController@store');
+//payment 
+Route::post ( 'reservations/{room_id}/charge', function (Request $request) {
+	\Stripe\Stripe::setApiKey ( 'sk_test_yourSecretkey' );
+	try {
+		\Stripe\Charge::create ( array (
+				"amount" => 300 * 100,
+				"currency" => "usd",
+				"source" => $request->input ( 'stripeToken' ), // obtained with Stripe.js
+				"description" => "Test payment." 
+		) );
+		Session::flash ( 'success-message', 'Payment done successfully !' );
+		return Redirect::back ();
+	} catch ( \Exception $e ) {
+		Session::flash ( 'fail-message', "Error! Please Try again." );
+		return Redirect::back ();
+	}
+} );
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 
 
 //UserController Routes
