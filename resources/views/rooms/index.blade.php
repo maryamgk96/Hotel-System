@@ -28,7 +28,9 @@
                      <th>Capacity</th>
                      <th>Price In Dollars</th>
                      <th>Floor Name</th>
+                     @role('admin')
                      <th>Manager Name​</th>
+                     @endrole
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -40,7 +42,8 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ url('roomdata') }}',
+               ajax: '{{ url('getRoomsData') }}',
+               @role('admin')
                columns: [
                         { data: 'number', name: 'number' },
                         { data: 'capacity', name: 'capacity' },
@@ -49,6 +52,15 @@
                         { data: 'user.name', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                      ]
+                @else
+                columns: [
+                        { data: 'number', name: 'number' },
+                        { data: 'capacity', name: 'capacity' },
+                        { data: 'price', name: 'price' },
+                        { data: 'floor.name', name: 'floor_id' },
+                        { data: 'actions', name: 'actions' , orderable: false, searchable: false},
+                     ]
+                @endrole 
             });
          });
          </script>
