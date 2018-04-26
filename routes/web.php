@@ -25,7 +25,9 @@ Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
 Route::get('clients', 'ClientsController@index');
-Route::get('data', 'AjaxController@clientsData');
+Route::get('clients/myclients', 'ClientsController@showMyClients');
+Route::get('clientsdata', 'AjaxController@clientsDataAjax');
+Route::get('approvedClients', 'AjaxController@approvedClients');
 Route::get('clients/create', 'ClientsController@create');
 Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');

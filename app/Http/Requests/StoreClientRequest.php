@@ -27,7 +27,7 @@ class StoreClientRequest extends FormRequest
             'name' => 'required|min:3',
             'email' => 'email|required|unique:clients',
             'password'=> 'required|min:5',
-            'phone'=>'required|min:6|max:14',
+            'phone'=>'required|min:6|max:12',
             'country'=>'required',
             'gender'=>'required'
             
