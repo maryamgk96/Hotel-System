@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Yajra\Datatables\Datatables;
+use App\Room;
+use App\Floor;
 use App\User;
 use App\Client;
 use Auth;
@@ -44,8 +46,55 @@ class AjaxController extends Controller
             })->rawcolumns(['actions'])->make(true); 
         }
     }
-    
-    public function clientsData()
+
+    public function roomsDataAjax(){
+        $user = Auth::user();
+        $rooms = Room::with('user')->with('floor');
+        
+        if($user->hasRole('admin')){
+            return Datatables::of($rooms) ->addColumn('actions', function ($room) {
+                return view('rooms.action',[ 'id' => $room -> id ]);
+            })->rawcolumns(['actions'])->make(true); 
+        }
+        else{
+            return Datatables::of($rooms) ->addColumn('actions', function ($room) {
+                if(Auth::user()->id == $room->created_by){
+                    return view('rooms.action',[ 'id' => $room -> id ]);
+                }
+                else
+                  return 'You Cannot CRUD On This Room';
+               
+            })->rawcolumns(['actions'])->make(true); 
+        }
+        
+    }
+
+
+    public function floorsDataAjax(){
+        $user = Auth::user(); 
+        $floors = Floor::with('user');
+        
+        if($user->hasRole('admin')){
+            return Datatables::of($floors) ->addColumn('actions', function ($floor) {
+                return view('floors.action',[ 'id' => $floor -> id ]);
+            })->rawcolumns(['actions'])->make(true); 
+        } 
+        else{
+            return Datatables::of($floors) ->addColumn('actions', function ($floor) {
+                if(Auth::user()->id == $floor->created_by){
+                    return view('floors.action',[ 'id' => $floor -> id ]);
+                }
+                else
+                  return 'You Cannot CRUD On This Floor';
+               
+            })->rawcolumns(['actions'])->make(true); 
+
+        }
+        
+    }
+
+
+    public function clientsDataAjax()
     {
         $clients = Client::with('user');
         return Datatables::of($clients)->addColumn('actions', function ($client) {
@@ -61,4 +110,22 @@ class AjaxController extends Controller
             
             ->rawcolumns(['actions','approve'])->make(true);    
     }
+
+    public function reservationDataAjax(){
+        $client= Auth::client(); 
+        $reservations = Reservation::query()->with('client');
+        return Datatables::of($reservations) ->make(true); 
+    }
+
+
+    public function showRoomAjaxData()
+    {
+        $rooms=Room::all()->where("is_reserved",'0');
+        return Datatables::of($rooms) ->addColumn('actions', function ($room) {
+            return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
+        })->rawcolumns(['actions'])->make(true);       
+    }
+
+
+
 }

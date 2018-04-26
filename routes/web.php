@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 //manage floors routes
 Route::get('floors', 'FloorsController@index')->name('floors.index');
-Route::get('floordata', 'FloorsController@data');
+Route::get('getFloorsData', 'AjaxController@floorsDataAjax');
 Route::get('floors/create', 'FloorsController@create');
 Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
@@ -38,10 +38,9 @@ Route::get('clients/{id}/approve','ClientsController@approve');
 
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
-Route::get('reservationdata', 'ReservationsController@data');
-Route::get('reservations/roomsdata', 'ReservationsController@show');
-Route::get('reservations/rooms', 'ReservationsController@showrooms');
-Route::get('reservations/rooms', 'ReservationsController@showrooms');
+Route::get('reservationdata', 'AjaxController@reservationDataAjax');
+Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
+Route::get('reservations/rooms', 'ReservationsController@show');
 Route::get ('reservations/create/{room_id}','ReservationsController@create');
 Route::post('reservations/{room_id}','ReservationsController@store');
 
@@ -103,7 +102,7 @@ Route::get(
 
 //manage rooms routes
 Route::get('rooms', 'RoomsController@index')->name('rooms.index');
-Route::get('roomdata', 'RoomsController@data');
+Route::get('getRoomsData', 'AjaxController@roomsDataAjax');
 Route::get('rooms/create', 'RoomsController@create');
 Route::post('rooms', 'RoomsController@store');
 Route::get('rooms/{id}/edit', 'RoomsController@edit');

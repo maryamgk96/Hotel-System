@@ -25,7 +25,9 @@
                   <tr>
                      <th>Number</th>
                      <th>Name</th>
+                     @role('admin')
                      <th>Manager Name​</th>
+                     @endrole
                      <th>Actions</th>
                   </tr>
                </thead>
@@ -37,13 +39,21 @@
                $('#table').DataTable({
                processing: true,
                serverSide: true,
-               ajax: '{{ url('floordata') }}',
+               ajax: '{{ url('getFloorsData') }}',
+               @role('admin')
                columns: [
                         { data: 'number', name: 'number' },  
                         { data: 'name', name: 'name' },
                         { data: 'user.name', name: 'created_by' },
                         { data: 'actions', name: 'actions' , orderable: false, searchable: false},
                      ]
+                @else
+                columns: [
+                        { data: 'number', name: 'number' },  
+                        { data: 'name', name: 'name' },
+                        { data: 'actions', name: 'actions' , orderable: false, searchable: false},
+                     ]
+                @endrole
             });
          });
          </script>

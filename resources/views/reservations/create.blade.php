@@ -34,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <label> Number Of Companions :</label>
-                                <input  class="form-control" name="no_companions"   placeholder="Please Enter Number Of Companions">
+                                <input type="number" class="form-control" name="no_companions"   placeholder="Please Enter Number Of Companions">
                             </div>
                                 </div>
               <div class="box-footer">

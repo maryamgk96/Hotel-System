@@ -18,13 +18,7 @@ class ReservationsController extends Controller
        
         return view('reservations.index');
     }
-    public function data(){
-        $reservations = Reservation::query();
-        return Datatables::of($reservations) ->make(true); 
-    }
-    
-
-
+   
      public function create($room_id)
     {
         $room=Room::find($room_id);
@@ -43,9 +37,10 @@ class ReservationsController extends Controller
 
         Validator::make($request->all(), [
             'paid_price' => 'required',
-            'no_companions' => 'required|between:1,'.$room->capacity,
+
+            'no_companions' => 'required|numeric|max:'.$room->capacity,
         ], [
-            'in' => "The Number Of Companions Must Be less Than Or Equal $room->capacity",
+            'max' => "The Number Of Companions Must Be less Than Or Equal $room->capacity",
         ])->validate();
        Reservation::create([
         'room_id' => $request->room_id,
@@ -57,21 +52,9 @@ class ReservationsController extends Controller
        return redirect('reservations');
     } 
     
-
     public function show()
-    {
-        $rooms=Room::all()->where("is_reserved",'0');
-        return Datatables::of($rooms) ->addColumn('actions', function ($room) {
-            return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
-        })->rawcolumns(['actions'])->make(true); 
-       
-    }
-
-    public function showrooms()
     {
         return view('reservations.show');
     }
-
-   
    
 }
