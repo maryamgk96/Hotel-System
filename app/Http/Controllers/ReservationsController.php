@@ -37,6 +37,7 @@ class ReservationsController extends Controller
 
         Validator::make($request->all(), [
             'paid_price' => 'required',
+
             'no_companions' => 'required|numeric|max:'.$room->capacity,
         ], [
             'max' => "The Number Of Companions Must Be less Than Or Equal $room->capacity",
