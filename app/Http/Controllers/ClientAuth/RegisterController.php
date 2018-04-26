@@ -7,6 +7,7 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Rinvex\Country\CountryLoader;
 
 class RegisterController extends Controller
@@ -53,6 +54,9 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:clients',
             'password' => 'required|min:6|confirmed',
+            'phone'=>'required|min:6|max:12',
+            'country'=>'required',
+            'gender'=>'required'
         ]);
     }
 
@@ -80,8 +84,8 @@ class RegisterController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function showRegistrationForm()
-    {
-        $countries = countries();
+    {   
+        $countries = Cache::get( 'countries' );
         return view('client.auth.register',compact('countries'));
     }
 
