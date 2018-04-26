@@ -83,11 +83,6 @@ Route::post(
 )->name('users.store')->where('role', 'managers|receptionists');
 
 Route::get(
-    '{role}/{user}',
-    'UserController@show'
-)->name('users.show')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager','forbid-banned-user');
-
-Route::get(
     '{role}/{user}/edit',
     'UserController@edit'
 )->name('users.edit')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager','forbid-banned-user');

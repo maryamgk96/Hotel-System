@@ -28,10 +28,11 @@
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input type="text" class="form-control" placeholder="Name" name="name">
           </div>
+          <br>
           <label>National ID</label>          
           <div class="input-group">
-                <span class="input-group-addon"><i class="	fa fa-address-card-o"></i></span>
-            <input type="text" class="form-control" placeholder="phone" name="phone">
+                <span class="input-group-addon"><i class="fa fa-id-card"></i></span>
+            <input type="text" class="form-control" placeholder="National ID" name="national_id">
           </div>
           <br>
           <label>Password</label>          
@@ -42,24 +43,8 @@
         <br>
         <div class="form-group">
                 <label>Avatar</label>
-          <input type="file" id="exampleInputFile">
+          <input type="file" name="avatar">
         </div>
-
-          <div class="row">
-            
-            <!-- /.col-lg-6 -->
-            <div class="col-lg-6">
-            <label>Gender</label>                
-              <div class="input-group">
-                
-                    <input type="radio" name="gender" value="0"> Male<br>
-                    <input type="radio" name="gender" value="1"> Female<br>              
-                    
-              </div>
-              <!-- /input-group -->
-            </div>
-            <!-- /.col-lg-6 -->
-          </div>
       </div>
       <!-- /.box-body -->
 
