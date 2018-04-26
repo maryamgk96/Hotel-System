@@ -68,6 +68,7 @@ class AjaxController extends Controller
         
     }
 
+
     public function floorsDataAjax(){
         $user = Auth::user(); 
         $floors = Floor::with('user');
@@ -92,5 +93,20 @@ class AjaxController extends Controller
     }
 
     
+    public function reservationDataAjax(){
+        $client= Auth::client(); 
+        $reservations = Reservation::query()->with('client');
+        return Datatables::of($reservations) ->make(true); 
+    }
+
+
+    public function showRoomAjaxData()
+    {
+        $rooms=Room::all()->where("is_reserved",'0');
+        return Datatables::of($rooms) ->addColumn('actions', function ($room) {
+            return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
+        })->rawcolumns(['actions'])->make(true);       
+    }
+
 
 }
