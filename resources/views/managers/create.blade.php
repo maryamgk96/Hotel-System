@@ -28,9 +28,9 @@
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
             <input type="text" class="form-control" placeholder="Name" name="name">
           </div>
-          <label>Phone Number</label>          
+          <label>National ID</label>          
           <div class="input-group">
-                <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                <span class="input-group-addon"><i class="	fa fa-address-card-o"></i></span>
             <input type="text" class="form-control" placeholder="phone" name="phone">
           </div>
           <br>
@@ -44,14 +44,6 @@
                 <label>Avatar</label>
           <input type="file" id="exampleInputFile">
         </div>
-        <div class="form-group">
-            <label>Country</label>
-            <select class="form-control select2" style="width: 100%;" name="country">
-                @foreach ($countries as $country)
-                <option value="{{$country['name']}}">{{$country['name']}}</option>
-            @endforeach
-            </select>
-          </div>
 
           <div class="row">
             
@@ -68,8 +60,6 @@
             </div>
             <!-- /.col-lg-6 -->
           </div>
-      </div>
-      <!-- /.box-body -->
       </div>
       <!-- /.box-body -->
 
