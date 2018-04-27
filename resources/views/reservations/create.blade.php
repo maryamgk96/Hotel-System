@@ -9,13 +9,15 @@
 	crossorigin="anonymous">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+	<script src='https://js.stripe.com/v2/' type='text/javascript'></script>
 </head>
 <body>
 	<div class="container">
 		<div class='row'>
 			<div class='col-md-4'></div>
 			<div class='col-md-4'>
-				<script src='https://js.stripe.com/v2/' type='text/javascript'></script>
+			
+				
 				<form accept-charset="UTF-8" action='/reservations/{{$room->id}}' class="require-validation"
 					data-cc-on-file="false"
 					data-stripe-publishable-key="pk_test_z3sI6Px0jejXktcyKVO7fcO9"

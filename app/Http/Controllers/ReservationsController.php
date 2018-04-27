@@ -12,7 +12,9 @@ use App\User;
 use App\Room;
 use App\Client;
 use Validator;
-use Stripe;
+use Stripe\Stripe;
+use Stripe\Customer;
+use Stripe\Charge;
 use Session;
 
 class ReservationsController extends Controller
@@ -43,16 +45,19 @@ class ReservationsController extends Controller
     public function store(Request $request,$room_id)
     {
         $room=Room::find($room_id);
-        $room->is_reserved=1;
-        $room->save();
-            \Stripe\Stripe::setApiKey ( 'sk_test_nXgbjnbF4AGQIGzDPJFHvwmi' );
-            \Stripe\Charge::create ( array (
-                    "amount" => 300 * 100,
-                    "currency" => "usd",
-                    "source" => $request->input ( 'stripeToken' ), // obtained with Stripe.js
-                    "description" => "Test payment." 
-            ) );
-            Session::flash ( 'success-message', 'Payment done successfully !' );
+     
+        Stripe::setApiKey ('sk_test_nXgbjnbF4AGQIGzDPJFHvwmi');
+        Customer::create(array(
+            'email' => Auth::guard('client')->user()->email,
+            'source'  => $request->stripeToken
+        ));
+        Charge::create ( array (
+            "amount" => $room->price,
+            "currency" => "usd",
+            "description" => "Test payment.", 
+            "source" => "tok_amex"
+        ) );
+
             Validator::make($request->all(), [
                 'paid_price' => 'required',
                 'no_companions' => 'required|numeric|max:'.$room->capacity,
@@ -65,6 +70,8 @@ class ReservationsController extends Controller
                 'paid_price' =>$request->paid_price,
                 'no_companions'=>$request->no_companions,
                ]);
+               $room->is_reserved=1;
+               $room->save();
             return redirect('reservations');
     } 
     
