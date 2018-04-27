@@ -154,7 +154,7 @@ class AjaxController extends Controller
     public function reservationsDataAjax(){
         $user = Auth::user(); 
         
-        if($user->hasRole(['admin']))
+        if($user->hasAnyRole(['manager','admin']))
         {
             $reservations = Reservation::with('client');
         }

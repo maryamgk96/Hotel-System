@@ -19,14 +19,13 @@ class ReservationsController extends Controller
 {
     public function index(){
         $client= Auth::guard('client')->user();
-         
         if($client)
         {
             return view('reservations.index');
         
         }
         else{
-            
+
             return view('reservations.indexALL');
         }
     }
