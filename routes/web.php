@@ -16,11 +16,11 @@ Route::get('/', function () {
 });
 
 //manage floors routes
-Route::get('floors', 'FloorsController@index')->name('floors.index');
+Route::get('floors', 'FloorsController@index')->name('floors.index')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::get('getFloorsData', 'AjaxController@floorsDataAjax');
-Route::get('floors/create', 'FloorsController@create');
+Route::get('floors/create', 'FloorsController@create')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::post('floors', 'FloorsController@store');
-Route::get('floors/{id}/edit', 'FloorsController@edit');
+Route::get('floors/{id}/edit', 'FloorsController@edit')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
@@ -96,13 +96,14 @@ Route::get(
     'unban/{user}',
     'UserController@unban'
 )->name('users.unban');
+Route::get('ERROR/{id}', 'ErrorController@unauthorized');
 
 //manage rooms routes
-Route::get('rooms', 'RoomsController@index')->name('rooms.index');
+Route::get('rooms', 'RoomsController@index')->name('rooms.index')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::get('getRoomsData', 'AjaxController@roomsDataAjax');
-Route::get('rooms/create', 'RoomsController@create');
+Route::get('rooms/create', 'RoomsController@create')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::post('rooms', 'RoomsController@store');
-Route::get('rooms/{id}/edit', 'RoomsController@edit');
+Route::get('rooms/{id}/edit', 'RoomsController@edit')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::put('rooms/{id}', 'RoomsController@update');
 Route::delete('rooms/{id}', 'RoomsController@destroy');
 

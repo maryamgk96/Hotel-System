@@ -19,11 +19,21 @@ class UserController extends Controller
         $role=substr($role, 0, -1);
         if($role == "manager")
         {
-            return view('managers.index');
+            if(Auth::user()->hasRole('admin'))
+            {
+                return view('managers.index');
+            }
+            else
+                return redirect('ERROR/1');
         }
         else
-        {
-            return view('receptionists.index');
+        {            
+            if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('manager'))
+            {
+                return view('receptionists.index');
+            }
+            else
+                return redirect('ERROR/1');            
         }
 
         
@@ -34,11 +44,23 @@ class UserController extends Controller
         $role=substr($role, 0, -1);
         if($role == "manager")
         {
-            return view('managers.create');
+            if(Auth::user()->hasRole('admin'))
+            {
+                return view('managers.create');
+            }
+            else
+                return redirect('ERROR/1');
+
         }
         else
         {
-            return view('receptionists.create');
+            if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('manager'))
+            {
+                return view('receptionists.create');
+            }
+            else
+                return redirect('ERROR/1');
+            
         }    
     }
     public function store($role,StoreUserRequest $request)
@@ -92,11 +114,22 @@ class UserController extends Controller
         $user = User::find($id);
         if($role == "manager")
         {
-            return view('managers.edit',['manager' => $user]);
+            if(Auth::user()->hasRole('admin'))
+            {
+                return view('managers.edit',['manager' => $user]);
+            }
+            else
+                return redirect('ERROR/1');
         }
         else
-        {
-            return view('receptionists.edit',['receptionist' => $user]);
+        {   
+            if(Auth::user()->hasRole('admin')||Auth::user()->hasRole('manager'))
+            {
+                return view('receptionists.edit',['receptionist' => $user]);
+            }
+            else
+                return redirect('ERROR/1');
+
         } 
     
     }
