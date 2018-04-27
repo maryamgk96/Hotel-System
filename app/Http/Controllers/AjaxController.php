@@ -71,7 +71,6 @@ class AjaxController extends Controller
         
     }
 
-
     public function floorsDataAjax(){
         $user = Auth::user(); 
         $floors = Floor::with('user');
@@ -152,6 +151,25 @@ class AjaxController extends Controller
 
     }
 
+    public function reservationsDataAjax(){
+        $user = Auth::user(); 
+        if($user->hasRole(['admin']))
+        {
+        $reservations = Reservation::with('client');
+        }
+        elseif ($user->hasRole(['receptionist']))
+        {
+            $clients=Client::where('approved_by',$user->id);
+            foreach($clients as $client){
+                $ids=[];
+                array_push($ids,Client::select('id'));
+            }
+            $reservations = Reservation::whereIn('client_id',$ids);
+        }
+        return Datatables::of($reservations) ->make(true); 
+    }
+    
+
     public function showRoomAjaxData()
     {
         $rooms=Room::all()->where("is_reserved",'0');
@@ -159,7 +177,5 @@ class AjaxController extends Controller
             return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
         })->rawcolumns(['actions'])->make(true);       
     }
-
-
 
 }

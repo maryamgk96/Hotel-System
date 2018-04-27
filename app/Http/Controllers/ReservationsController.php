@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Reservation;
 use Auth;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 use Yajra\Datatables\Datatables;
 use App\User;
 use App\Room;
@@ -16,8 +18,17 @@ use Session;
 class ReservationsController extends Controller
 {
     public function index(){
-       
-        return view('reservations.index');
+        $client= Auth::guard('client')->user();
+         
+        if($client)
+        {
+            return view('reservations.index');
+        
+        }
+        else{
+            
+            return view('reservations.indexALL');
+        }
     }
    
      public function create($room_id)
@@ -35,8 +46,7 @@ class ReservationsController extends Controller
         $room=Room::find($room_id);
         $room->is_reserved=1;
         $room->save();
-        \Stripe\Stripe::setApiKey ( 'sk_test_nXgbjnbF4AGQIGzDPJFHvwmi' );
-        try {
+            \Stripe\Stripe::setApiKey ( 'sk_test_nXgbjnbF4AGQIGzDPJFHvwmi' );
             \Stripe\Charge::create ( array (
                     "amount" => 300 * 100,
                     "currency" => "usd",
@@ -57,10 +67,6 @@ class ReservationsController extends Controller
                 'no_companions'=>$request->no_companions,
                ]);
             return redirect('reservations');
-        } catch ( \Exception $e ) {
-            Session::flash ( 'fail-message', "Error! Please Try again." );
-            return Redirect::back ();
-        }      
     } 
     
     public function show()

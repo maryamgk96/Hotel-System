@@ -23,7 +23,7 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
-
+//manage clients routes
 Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients');
 Route::get('clientsdata', 'AjaxController@clientsDataAjax');
@@ -34,7 +34,6 @@ Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
 Route::delete('clients/{id}/delete', 'ClientsController@destroy');
 Route::get('clients/{id}/approve','ClientsController@approve');
-
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
@@ -42,6 +41,8 @@ Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
 Route::get('reservations/rooms', 'ReservationsController@show');
 Route::get ('reservations/create/{room_id}','ReservationsController@create');
 Route::post('reservations/{room_id}','ReservationsController@store');
+Route::get('allreservations', 'AjaxController@reservationsDataAjax');
+
 
 Auth::routes();
 
@@ -89,8 +90,6 @@ Route::get(
     'unban/{user}',
     'UserController@unban'
 )->name('users.unban');
-
-
 
 //manage rooms routes
 Route::get('rooms', 'RoomsController@index')->name('rooms.index');
