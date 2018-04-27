@@ -42,7 +42,8 @@ class mail extends Command
     {
         $clients=Client::all();
         foreach($clients as $client)
-        {
+        { 
+            
             $today = date('Y-m-d H:i:s');
             $lastlogin = ($client->last_login);
             $datetime1 = new DateTime($today);
@@ -52,7 +53,7 @@ class mail extends Command
             if($days>30)
             {
                 $client->notify(new sendemail($client));      
-                return ("done");
+                
             }
         }
     }

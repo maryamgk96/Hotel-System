@@ -13,7 +13,7 @@
     </div>
 @endif
 
-<form role="form" method="post" action="/clients">
+<form role="form" method="post" action="/clients" enctype="multipart/form-data">
     @csrf
 
     <div class="box-body">
@@ -42,7 +42,7 @@
         <br>
         <div class="form-group">
                 <label>Avatar</label>
-          <input type="file" id="exampleInputFile">
+          <input type="file" id="exampleInputFile" name="avatar" >
         </div>
         <div class="form-group">
             <label>Country</label>

@@ -25,8 +25,8 @@ class ReservationsController extends Controller
         
         }
         else{
-
-            return view('reservations.indexALL');
+            
+            return view('reservations.indexAll');
         }
     }
    

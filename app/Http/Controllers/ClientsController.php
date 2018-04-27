@@ -7,6 +7,7 @@ use Rinvex\Country\CountryLoader;
 use App\Http\Requests\StoreClientRequest;
 use App\Notifications\ClientApproved;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use App\Client;
 use App\User;
 use App\Reservation ;
@@ -48,7 +49,12 @@ class ClientsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StoreClientRequest $request)
-    {
+    {   
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public');
+        
+          }
+    
         Client::create([
             'name' => $request->name,
             'email'=>$request->email,
@@ -56,7 +62,7 @@ class ClientsController extends Controller
             'mobile'=>$request->phone,
             'country'=>$request->country,
             'gender'=>$request->gender,
-            
+            'avatar'=>$path
         ]);
         return redirect('/clients');
     }
@@ -80,9 +86,10 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
-        $client=Client::find($id);
+        $countries =  Cache::rememberForever('countries', function() {
+            return countries();
+        });
 
-        $countries = countries();
         return view('clients.edit',compact('countries','client'));
     }
 

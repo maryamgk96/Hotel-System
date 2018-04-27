@@ -9,7 +9,7 @@
 
                 <div class="panel-body">
                     You are logged in as Client!
-                </div>
+                </div>        
             </div>
         </div>
     </div>
