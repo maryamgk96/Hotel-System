@@ -124,3 +124,8 @@ Route::group(['prefix' => 'client'], function () {
   Route::get('/password/reset', 'ClientAuth\ForgotPasswordController@showLinkRequestForm')->name('clientpassword.reset');
   Route::get('/password/reset/{token}', 'ClientAuth\ResetPasswordController@showResetForm');
 });
+
+Route::get(
+    'statistics',
+    'ChartsController@index'
+)->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');

@@ -6,8 +6,17 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading">Register</div>
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
                 <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/client/register') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/client/register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -74,7 +83,7 @@
         <br>
         <div class="form-group">
                 <label>Avatar</label>
-          <input type="file" id="exampleInputFile">
+          <input type="file" id="exampleInputFile" name="avatar">
         </div>
         <div class="form-group">
             <label>Country</label>

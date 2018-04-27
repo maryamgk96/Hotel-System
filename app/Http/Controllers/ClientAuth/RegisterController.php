@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Rinvex\Country\CountryLoader;
-
+use Illuminate\Support\Facades\Input;
 class RegisterController extends Controller
 {
     /*
@@ -30,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/client';
+    protected $redirectTo = '/client/home';
 
     /**
      * Create a new controller instance.
@@ -54,9 +54,10 @@ class RegisterController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:clients',
             'password' => 'required|min:6|confirmed',
-            'phone'=>'required|min:6|max:12',
+            'phone'=>'required|regex:/(01)[0-9]{9}/',
             'country'=>'required',
-            'gender'=>'required'
+            'gender'=>'required',
+            'avatar'=>'required|mimes:jpeg,png'
         ]);
     }
 
@@ -68,13 +69,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $path=Input::file('avatar')->store('public');
         return Client::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
             'mobile'=>$data['phone'],
             'country'=>$data['country'],
-            'gender'=>$data['gender'],            
+            'gender'=>$data['gender'],  
+            'avatar'=>$path          
         ]);
     }
 
@@ -85,7 +88,9 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {   
-        $countries = Cache::get( 'countries' );
+        $countries =  Cache::rememberForever('countries', function() {
+            return countries();
+        });
         return view('client.auth.register',compact('countries'));
     }
 
