@@ -67,12 +67,12 @@ class RoomsController extends Controller
         $room = Room::find($id);
         if($room->is_reserved == 0){
             $room->delete();
-            return redirect(route('rooms.index'));
         }
         else{
-            return view('rooms.index',[
-                'error' => 'This room can not be deleted , it is a reserved room '
-                 ]);
+            return json_encode([
+                'error' => 1
+                ]);
+            
         }    
     }
 }

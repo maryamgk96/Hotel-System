@@ -10,15 +10,12 @@
              <!--
                  alert error if someone tried to delete a reserved room  
               -->
-              @if ($error)
-                  <div class="alert alert-danger">
-                      <ul>
-                      
-                       <li>{{ $error }}</li>
-                       
+              
+                  <div class="error">
+                      <ul class="error">
                        </ul>
                    </div>
-                @endif
+               
 
                 
             <table class="table table-bordered" id="table">
@@ -63,5 +60,29 @@
                 @endrole 
             });
          });
+
+         $(document).on('click','.delete',function(){
+        let id = $(this).attr('target');
+        let conf = confirm("Are you sure you want to delete this record?");
+        if(conf){
+            $.ajax({
+                url:`rooms/${id}`,
+                type: 'POST',
+                data:{
+                        '_token' : '{{csrf_token()}}',
+                        '_method':'DELETE'
+                    },
+                success: function(res){
+                    if(res){
+                        $myLi=$("<li>").html("This room can not be deleted , it is a reserved room ")
+                        $("ul.error").append($myLi)
+                        $("#error").html(res);
+                        $("div.error").addClass("alert alert-danger");
+                    }
+                 $('#table').DataTable().ajax.reload();
+                           
+                }});
+         }
+        });
          </script>
  @endsection

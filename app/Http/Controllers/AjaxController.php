@@ -12,6 +12,7 @@ use App\Reservation;
 use App\User;
 use App\Client;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class AjaxController extends Controller
@@ -132,8 +133,7 @@ class AjaxController extends Controller
 
     public function approvedClients()
     {    $user = Auth::user(); 
-        $clients=Client::where('approved_by',$user->id);
-           
+        $clients=Client::where('approved_by',$user->id);           
             return Datatables::of($clients)
         ->addColumn('gender',function($client){
             if($client->gender==0)
@@ -153,18 +153,19 @@ class AjaxController extends Controller
 
     public function reservationsDataAjax(){
         $user = Auth::user(); 
-        if($user->hasRole(['admin']))
+        
+        if($user->hasAnyRole(['manager','admin']))
         {
-        $reservations = Reservation::with('client');
+            $reservations = Reservation::with('client');
         }
         elseif ($user->hasRole(['receptionist']))
-        {
-            $clients=Client::where('approved_by',$user->id);
+        {   
+            $ids=[];
+            $clients=Client::where('approved_by','=',$user->id)->get();
             foreach($clients as $client){
-                $ids=[];
-                array_push($ids,Client::select('id'));
+               array_push($ids,$client->id);
             }
-            $reservations = Reservation::whereIn('client_id',$ids);
+            $reservations = Reservation::whereIn('client_id',$ids)->with('client');
         }
         return Datatables::of($reservations) ->make(true); 
     }

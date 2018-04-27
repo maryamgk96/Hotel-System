@@ -76,12 +76,11 @@ class FloorsController extends Controller
 
         if(!Room::where('floor_id', $id)->exists()){
             Floor::find($id)->delete();
-            return redirect(route('floors.index'));
         }
         else{
-            return view('floors.index',[
-                'error' => 'This floor can not be deleted , it has rooms associated to it'
-                 ]);
+            return json_encode([
+                'error' => 1
+                ]);
         }
     }
 }
