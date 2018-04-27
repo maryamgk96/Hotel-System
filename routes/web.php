@@ -27,9 +27,9 @@ Route::delete('floors/{id}', 'FloorsController@destroy');
 
 //manage clients routes
 Route::get('clients', 'ClientsController@index');
-Route::get('clients/myclients', 'ClientsController@showMyClients');
+Route::get('clients/myclients', 'ClientsController@showMyClients')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('clientsdata', 'AjaxController@clientsDataAjax');
-Route::get('approvedClients', 'AjaxController@approvedClients');
+Route::get('approvedClients', 'AjaxController@approvedClients')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('clients/create', 'ClientsController@create');
 Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');
@@ -40,7 +40,7 @@ Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delet
 
 
 //manage reservations routes
-Route::get('reservations', 'ReservationsController@index');
+Route::get('reservations', 'ReservationsController@index')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
 Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
 Route::get('reservations/rooms', 'ReservationsController@show');
