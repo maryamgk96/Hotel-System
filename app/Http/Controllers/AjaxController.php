@@ -12,6 +12,7 @@ use App\Reservation;
 use App\User;
 use App\Client;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class AjaxController extends Controller
@@ -70,7 +71,6 @@ class AjaxController extends Controller
         }
         
     }
-
 
     public function floorsDataAjax(){
         $user = Auth::user(); 
@@ -133,8 +133,7 @@ class AjaxController extends Controller
 
     public function approvedClients()
     {    $user = Auth::user(); 
-        $clients=Client::where('approved_by',$user->id);
-           
+        $clients=Client::where('approved_by',$user->id);           
             return Datatables::of($clients)
         ->addColumn('gender',function($client){
             if($client->gender==0)
@@ -152,6 +151,26 @@ class AjaxController extends Controller
 
     }
 
+    public function reservationsDataAjax(){
+        $user = Auth::user(); 
+        
+        if($user->hasRole(['admin']))
+        {
+            $reservations = Reservation::with('client');
+        }
+        elseif ($user->hasRole(['receptionist']))
+        {   
+            $ids=[];
+            $clients=Client::where('approved_by','=',$user->id)->get();
+            foreach($clients as $client){
+               array_push($ids,$client->id);
+            }
+            $reservations = Reservation::whereIn('client_id',$ids)->with('client');
+        }
+        return Datatables::of($reservations) ->make(true); 
+    }
+    
+
     public function showRoomAjaxData()
     {
         $rooms=Room::all()->where("is_reserved",'0');
@@ -159,7 +178,5 @@ class AjaxController extends Controller
             return '<a href="/reservations/create/'.$room->id.'" class="btn btn-xm btn-primary"> Reserve</a>';
         })->rawcolumns(['actions'])->make(true);       
     }
-
-
 
 }

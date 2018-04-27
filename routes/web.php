@@ -24,6 +24,8 @@ Route::get('floors/{id}/edit', 'FloorsController@edit')->middleware('auth','role
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
+
+//manage clients routes
 Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients');
 Route::get('clientsdata', 'AjaxController@clientsDataAjax');
@@ -33,7 +35,9 @@ Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
 Route::get('clients/{id}/approve','ClientsController@approve');
+
 Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delete');
+
 
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
@@ -42,6 +46,8 @@ Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
 Route::get('reservations/rooms', 'ReservationsController@show');
 Route::get ('reservations/create/{room_id}','ReservationsController@create');
 Route::post('reservations/{room_id}','ReservationsController@store');
+Route::get('allreservations', 'AjaxController@reservationsDataAjax');
+
 
 Auth::routes();
 
@@ -92,8 +98,6 @@ Route::get(
 )->name('users.unban');
 Route::get('ERROR/{id}', 'ErrorController@unauthorized');
 
-
-
 //manage rooms routes
 Route::get('rooms', 'RoomsController@index')->name('rooms.index')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::get('getRoomsData', 'AjaxController@roomsDataAjax');
@@ -106,7 +110,7 @@ Route::delete('rooms/{id}', 'RoomsController@destroy');
 
 
 
-
+//client auth routs
 Route::group(['prefix' => 'client'], function () {
   Route::get('/login', 'ClientAuth\LoginController@showLoginForm')->name('clientlogin');
   Route::post('/login', 'ClientAuth\LoginController@login');
