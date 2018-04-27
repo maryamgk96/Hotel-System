@@ -44,8 +44,13 @@
               <!-- Menu Toggle Button -->
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img src="<?php  if($user){url(Auth::user()->avatar);}
-                elseif($client){ Auth::guard('client')->user()->avatar;}?>" class="user-image" alt="User Image">
+                <?php if($user):                
+                ?>
+                <img src="{{ url(Auth::user()->avatar) }}" class="user-image" alt="User Image">
+                <?php elseif($client): 
+                ?>
+                <img src="{{ url(Auth::guard('client')->user()->avatar) }}" class="user-image" alt="User Image">
+                <?php endif; ?>
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs"><?php  if($user){?>
                   {{Auth::user()->name}}<?php
@@ -59,7 +64,7 @@
                 <!-- The user image in the menu -->
                 <li class="user-header">
                   <img src="<?php  if($user){url(Auth::user()->avatar);}
-                elseif($client){ Auth::guard('client')->user()->avatar;}?>" class="img-circle" alt="User Image">
+                elseif($client){ Auth::guard('client')->user()->avatar;}?>" class="img-circle">
                   <p>
                 <span class="hidden-xs"><?php  if($user){?>
                   {{Auth::user()->name}}<?php

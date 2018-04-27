@@ -25,6 +25,14 @@ class ChartsController extends Controller
                  ->where('gender','=',1);
         })
         ->get()->count();
+
+       dd(DB::table('reservations')
+            ->select(DB::raw('SUM(paid_price) as revenue, MONTH(created_at) as month, YEAR(created_at) as year'))
+            ->groupBy(DB::raw('YEAR(created_at) ASC, MONTH(created_at) ASC'))->get());
+
+
+
+
         return view('statistics.statistics',['male' => $MaleReservations,'female' => $FemaleReservations]);
 
         
