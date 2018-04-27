@@ -23,10 +23,8 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
-<<<<<<< HEAD
-=======
 
->>>>>>> 6006d783ca740b7ee9bcf48689df04242b93aa65
+
 //manage clients routes
 Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients');
@@ -37,11 +35,10 @@ Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
 Route::get('clients/{id}/approve','ClientsController@approve');
-<<<<<<< HEAD
-=======
+
 Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delete');
 
->>>>>>> 6006d783ca740b7ee9bcf48689df04242b93aa65
+
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
