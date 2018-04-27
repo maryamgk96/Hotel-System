@@ -40,7 +40,7 @@ Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delet
 
 
 //manage reservations routes
-Route::get('reservations', 'ReservationsController@index')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
+Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
 Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
 Route::get('reservations/rooms', 'ReservationsController@show');
