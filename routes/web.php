@@ -23,6 +23,10 @@ Route::post('floors', 'FloorsController@store');
 Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6006d783ca740b7ee9bcf48689df04242b93aa65
 //manage clients routes
 Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients');
@@ -32,8 +36,12 @@ Route::get('clients/create', 'ClientsController@create');
 Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit');
 Route::put('clients/{id}', 'ClientsController@update');
-Route::delete('clients/{id}/delete', 'ClientsController@destroy');
 Route::get('clients/{id}/approve','ClientsController@approve');
+<<<<<<< HEAD
+=======
+Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delete');
+
+>>>>>>> 6006d783ca740b7ee9bcf48689df04242b93aa65
 //manage reservations routes
 Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
@@ -56,6 +64,7 @@ Route::get(
 )->name('users.index')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('getManagersData', 'AjaxController@managersDataAjax');
 Route::get('getReceptionistsData', 'AjaxController@receptionistsDataAjax');
+Route::get('deleteData/{id}', 'AjaxController@managersDataAjax');
 Route::get(
     '{role}/create',
     'UserController@create'
@@ -77,9 +86,9 @@ Route::put(
 )->name('users.update')->where('role', 'managers|receptionists');
 
 Route::delete(
-    '{role}/{user}',
+    'users/{user}',
     'UserController@destroy'
-)->name('users.destroy')->where('role', 'managers|receptionists');
+)->name('users.destroy');
 
 Route::get(
     'ban/{user}',
@@ -103,7 +112,7 @@ Route::delete('rooms/{id}', 'RoomsController@destroy');
 
 
 
-
+//client auth routs
 Route::group(['prefix' => 'client'], function () {
   Route::get('/login', 'ClientAuth\LoginController@showLoginForm')->name('clientlogin');
   Route::post('/login', 'ClientAuth\LoginController@login');
