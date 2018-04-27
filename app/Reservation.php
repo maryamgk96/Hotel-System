@@ -13,7 +13,6 @@ class Reservation extends Model
         'client_id',
         'paid_price',
         'no_companions',
-        'created_by',
     ];
     
 

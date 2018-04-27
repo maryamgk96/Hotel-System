@@ -27,9 +27,10 @@ class StoreClientRequest extends FormRequest
             'name' => 'required|min:3',
             'email' => 'email|required|unique:clients',
             'password'=> 'required|min:5',
-            'phone'=>'required|min:6|max:12',
+            'phone'=>'required|regex:/(01)[0-9]{9}/',
             'country'=>'required',
-            'gender'=>'required'
+            'gender'=>'required',
+            'avatar'=>'required|mimes:jpeg,png'
             
         ];
     }
