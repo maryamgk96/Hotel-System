@@ -24,6 +24,7 @@ Route::get('floors/{id}/edit', 'FloorsController@edit');
 Route::put('floors/{id}', 'FloorsController@update');
 Route::delete('floors/{id}', 'FloorsController@destroy');
 
+//manage clients routes
 Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients');
 Route::get('clientsdata', 'AjaxController@clientsDataAjax');
@@ -105,7 +106,7 @@ Route::delete('rooms/{id}', 'RoomsController@destroy');
 
 
 
-
+//client auth routs
 Route::group(['prefix' => 'client'], function () {
   Route::get('/login', 'ClientAuth\LoginController@showLoginForm')->name('clientlogin');
   Route::post('/login', 'ClientAuth\LoginController@login');
