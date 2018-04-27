@@ -2,8 +2,8 @@
 
 @section('content')
 
-<h1 align="center">My Reservations</h1>
-<a href="/reservations/rooms"  class="btn btn-primary">Show Rooms</a><br><br>
+<h1 align="center">Clients Reservations</h1>
+
 <table class="table table-bordered" id="table">
   <thead>
     <tr>
