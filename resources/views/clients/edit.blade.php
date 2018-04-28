@@ -48,13 +48,7 @@
                         <input type="text" class="form-control" placeholder="phone" name="phone" value="{{$client->mobile}}">
                     </div>
                     <br>
-                    <label>Password</label>          
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
-                    </div>
-                    <br>
-                    <div class="input-group">
+                    <div class="input-group" >
                         <label>Avatar</label>
                         <input type="file" id="exampleInputFile" name="avatar">
                     </div>
