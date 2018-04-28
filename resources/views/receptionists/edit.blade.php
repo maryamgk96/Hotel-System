@@ -21,7 +21,7 @@
         <!-- Horizontal Form -->
         <div class="box box-info">
             <div class="box-header with-border">
-                <h2 class="text-center">Update Manager</h2>
+                <h2 class="text-center">Update Receptionist</h2>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
