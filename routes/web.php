@@ -141,3 +141,6 @@ Route::get(
     'statistics',
     'ChartsController@index'
 )->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
+
+// Route for export/download tabledata to .csv, .xls or .xlsx
+Route::get('downloadExcel/{type}', 'ExcelsheetsController@downloadExcel');

@@ -6,7 +6,9 @@ use App\Notifications\ClientResetPassword;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Client extends Authenticatable
+use Maatwebsite\Excel\Concerns\FromCollection;
+
+class Client extends Authenticatable implements FromCollection
 {
     use Notifiable;
 
@@ -49,5 +51,11 @@ class Client extends Authenticatable
     {
         return $this->belongsTo(User::class,'approved_by');
     }
+
+    public function collection()
+    {
+        return Client::all();
+    }
+
     
 }
