@@ -5,6 +5,7 @@
 
                @hasanyrole('manager|admin')
              <a href="/clients/create"  class="btn btn-primary">Create New Client</a><br><br>
+             <a href="/downloadExcel/xls"><button class="btn btn-success">Download Excel xls</button></a><br><br>
              @endhasanyrole
 
              @hasrole('receptionist')
