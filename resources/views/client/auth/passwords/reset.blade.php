@@ -2,13 +2,14 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Reset Password</div>
-
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/client/password/reset') }}">
+<div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+            
+                <div class="card-header with-border">
+                <h2 class="text-center">Reset Password</h2>
+                <div class="card-body">
+                    <form  role="form" method="POST" action="{{ url('/client/password/reset') }}">
                         {{ csrf_field() }}
 
                         <input type="hidden" name="token" value="{{ $token }}">

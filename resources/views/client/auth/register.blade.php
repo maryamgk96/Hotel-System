@@ -2,11 +2,15 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
-                @if ($errors->any())
+<div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+
+                <div class="card-header with-border">
+                <h2 class="text-center">Register</h2>
+</div> 
+<div class="card-body">
+@if ($errors->any())
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
@@ -15,7 +19,6 @@
         </ul>
     </div>
 @endif
-                <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/client/register') }}" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
@@ -81,13 +84,13 @@
           </div>
           
         <br>
-        <div class="form-group">
+        <div class="input-group">
                 <label>Avatar</label>
           <input type="file" id="exampleInputFile" name="avatar">
         </div>
-        <div class="form-group">
+        <div class="input-group">
             <label>Country</label>
-            <select class="form-control select2" style="width: 100%;" name="country">
+            <select class="  form-control select2" style="width: 100%;" name="country">
                 @foreach ($countries as $country)
                 <option value="{{$country['name']}}">{{$country['name']}}</option>
             @endforeach

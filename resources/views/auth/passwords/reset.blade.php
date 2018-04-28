@@ -3,9 +3,12 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+            
+                <div class="card-header with-border">
+                <h2 class="text-center">{{ __('Reset Password') }}</h2>
+                 </div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('password.request') }}">
