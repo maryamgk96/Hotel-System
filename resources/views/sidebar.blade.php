@@ -28,6 +28,7 @@
             <li><a href="/clients/myclients"><i class="fa fa-circle-o"></i>  My Approved Clients</a></li>
             <li><a href="/reservations"><i class="fa fa-circle-o"></i>  Clients Reservations</a></li>
             @endrole
+            
             <?php $client=Auth::guard('client')->user(); 
             if($client){
             ?>
