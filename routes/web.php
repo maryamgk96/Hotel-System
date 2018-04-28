@@ -77,6 +77,18 @@ Route::get(
     'UserController@edit'
 )->name('users.edit')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager','forbid-banned-user');
 
+Route::get(
+    'profile/{user}/edit',
+    'UserController@editProfile'
+)->name('users.editProfile')->middleware('auth');
+
+
+Route::put(
+    'profile/{user}',
+    'UserController@updateProfile'
+)->name('users.updateProfile');
+
+
 Route::put(
     '{role}/{user}',
     'UserController@update'

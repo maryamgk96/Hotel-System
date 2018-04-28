@@ -189,4 +189,30 @@ class UserController extends Controller
         return redirect('receptionists');  
     }
 
+    public function editProfile($id){
+        $user = User::find($id);
+        
+        return view('auth.editProfile',[
+            'user' => $user,
+            
+        ]);
+    }
+
+    public function updateProdile(UpdateUserRequest $request,$id){
+        $user = User::find($id);
+            $user->email = $request->email;
+            $user->name = $request->name;
+            $user->national_id = $request->national_id;
+            if($request->avatar)
+            {
+                Storage::delete(str_replace("/storage", "public", $user->avatar));
+                $path = $request->file('avatar')->store('public');  
+                $user->avatar = $path;
+            }
+            $user->save();
+        
+        
+       return redirect('/home'); 
+    }
+
 }
