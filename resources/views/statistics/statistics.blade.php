@@ -3,11 +3,11 @@
 @section('content')
 <center> <h1>Statistics</h1></center>
 
-<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-
+<div id="pieChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<div id="lineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <script>
-Highcharts.chart('container', {
+Highcharts.chart('pieChart', {
   chart: {
     plotBackgroundColor: null,
     plotBorderWidth: null,
@@ -15,7 +15,7 @@ Highcharts.chart('container', {
     type: 'pie'
   },
   title: {
-    text: 'Males Vs. Females Reservations'
+    text: 'Male - Female Reservation​'
   },
   tooltip: {
     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -47,6 +47,47 @@ Highcharts.chart('container', {
     }]
   }]
 });
+
+Highcharts.chart('lineChart', {
+    chart: {
+        type: 'line'
+    },
+    title: {
+        text: 'Reservations Revenue 2018'
+    },
+    xAxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+    },
+    yAxis: {
+        title: {
+            text: '[Revenue ($)]'
+        }
+    },
+    plotOptions: {
+        line: {
+            dataLabels: {
+                enabled: true
+            },
+            enableMouseTracking: false
+        }
+    },
+    series: [{
+        name: 'Revenue',
+        data:[parseInt(<?php echo $jan; ?>), parseInt(<?php echo $feb; ?>), parseInt(<?php echo $mar; ?>), parseInt(<?php echo $apr; ?>), parseInt(<?php echo $may; ?>), parseInt(<?php echo $jun; ?>), parseInt(<?php echo $jul; ?>), parseInt(<?php echo $aug; ?>), parseInt(<?php echo $sep; ?>), parseInt(<?php echo $oct; ?>), parseInt(<?php echo $nov; ?>), parseInt(<?php echo $dec; ?>)]
+    }]
+});
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 
 

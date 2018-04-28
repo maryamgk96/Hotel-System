@@ -25,7 +25,18 @@ class ChartsController extends Controller
                  ->where('gender','=',1);
         })
         ->get()->count();
-        return view('statistics.statistics',['male' => $MaleReservations,'female' => $FemaleReservations]);
+
+       $allRevenues=DB::table('reservations')
+            ->select(DB::raw('SUM(paid_price) as revenue, MONTH(created_at) as month, YEAR(created_at) as year'))
+            ->groupBy(DB::raw('YEAR(created_at) ASC, MONTH(created_at) ASC'))->get();
+            $revenues=[0,0,0,0,0,0,0,0,0,0,0,0];
+            foreach($allRevenues as $monthlyRevenue){
+                if($monthlyRevenue->year == 2018)
+                {
+                   $revenues[$monthlyRevenue->month]=$monthlyRevenue->revenue;
+                }
+            } 
+        return view('statistics.statistics',['male' => $MaleReservations,'female' => $FemaleReservations,'jan'=>$revenues[0],'feb'=>$revenues[1],'mar'=>$revenues[2],'apr'=>$revenues[3],'may'=>$revenues[4],'jun'=>$revenues[5],'jul'=>$revenues[6],'aug'=>$revenues[7],'sep'=>$revenues[8],'oct'=>$revenues[9],'nov'=>$revenues[10],'dec'=>$revenues[11]]);
 
         
 
