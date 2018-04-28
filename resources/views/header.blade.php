@@ -1,9 +1,9 @@
 <!-- Main Header -->
-<header class="main-header">
+<header class="main-header" style ="margin-left:0px">
    
     <!-- Logo -->
     <a href="/home" class="logo"><b>Hotel</b>System</a>
-    <nav class="navbar navbar-static-top">
+    <nav class="navbar">
       <div class="container">
         <div class="navbar-header">
          

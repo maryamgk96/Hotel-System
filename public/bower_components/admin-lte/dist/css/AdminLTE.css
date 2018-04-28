@@ -196,6 +196,7 @@ a:focus {
   transition: margin-left 0.3s ease-in-out;
   margin-bottom: 0;
   margin-left: 230px;
+
   border: none;
   min-height: 50px;
   border-radius: 0;
@@ -1019,6 +1020,9 @@ a:focus {
   margin: auto 10px auto auto;
   width: 40px;
   height: 40px;
+}
+.main-header{
+  margin-left: 0;
 }
 .navbar-nav > .messages-menu > .dropdown-menu > li .menu > li > a > h4 {
   padding: 0;
