@@ -86,6 +86,7 @@ class ClientsController extends Controller
      */
     public function edit($id)
     {
+        $client = Client::find($id);
         $countries =  Cache::rememberForever('countries', function() {
             return countries();
         });
