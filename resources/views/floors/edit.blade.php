@@ -1,30 +1,46 @@
 @extends('admin_template')
 @section('content')
 
-<h1>Edit Floor</h1><br><br>
 
 @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
 @endif
+<br><br>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6 ">
 
-<form method="post" action="/floors/{{$floor->id}}">
-{{method_field('put')}}
-{{csrf_field()}}
+        <!-- Horizontal Form -->
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h2 class="text-center">Update Floor</h2>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
 
-  <div class="form-group">
-    <label >Name</label>
-    <input type="text" class="form-control" name="name" value="{{$floor->name}}">
-  </div>
-  
-  
+            <form method="post" class="form-horizontal" action="/floors/{{$floor->id}}">
+                {{method_field('put')}}
+                {{csrf_field()}}
 
-  <input type="submit" class="btn btn-info" value="Update"/>
-  
+                <div class="box-body">
+                    <div class="input-group">
+                        <label >Floor Name</label>
+                        <input type="text" class="form-control" name="name" value="{{$floor->name}}">
+                    </div>
+                </div>
+
+                <div class="box-footer">
+                    <input type="submit" class="btn btn-info" value="Update"/>
+                </div>
+        </div>
+    </div>
+    <div class='col-lg-3'></div>
+</div>
 </form>
 @endsection
