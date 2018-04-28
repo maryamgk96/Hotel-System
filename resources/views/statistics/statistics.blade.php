@@ -4,6 +4,7 @@
 <center> <h1>Statistics</h1></center>
 
 <div id="pieChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+<br><br>
 <div id="lineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <script>

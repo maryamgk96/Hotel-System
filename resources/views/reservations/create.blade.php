@@ -93,6 +93,11 @@
 			<div class='col-md-4'></div>
 		</div>
 	</div>
+
+
+
+
+	
 	<script src="https://code.jquery.com/jquery-1.12.3.min.js"
 		integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ="
 		crossorigin="anonymous"></script>
