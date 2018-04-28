@@ -14,7 +14,9 @@
 @endif
 <br><br>
 <div class="row">
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+            <img src="{{ url($client->avatar) }}" class="img-circle" width="300" height="300">
+    </div>
     <div class="col-md-6 ">
         <!-- Horizontal Form -->
         <div class="box box-info">
@@ -23,7 +25,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" class="form-horizontal" action="/clients/{{$client->id}}">
+            <form role="form" method="post" class="form-horizontal" action="/clients/{{$client->id}}" enctype="multipart/form-data">
                 {{method_field('put')}}
                 @csrf
 
@@ -46,15 +48,9 @@
                         <input type="text" class="form-control" placeholder="phone" name="phone" value="{{$client->mobile}}">
                     </div>
                     <br>
-                    <label>Password</label>          
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
-                    </div>
-                    <br>
-                    <div class="input-group">
+                    <div class="input-group" >
                         <label>Avatar</label>
-                        <input type="file" id="exampleInputFile">
+                        <input type="file" id="exampleInputFile" name="avatar">
                     </div>
                     <div class="input-group">
                         <label>Country</label>

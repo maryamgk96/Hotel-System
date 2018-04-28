@@ -5,6 +5,7 @@ use Yajra\Datatables\Datatables;
 use Illuminate\Http\Request;
 use Rinvex\Country\CountryLoader;
 use App\Http\Requests\StoreClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 use App\Notifications\ClientApproved;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
@@ -50,10 +51,12 @@ class ClientsController extends Controller
      */
     public function store(StoreClientRequest $request)
     {   
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('public');
-        
-          }
+        if( $request->file('avatar'))
+        {
+          $path = $request->file('avatar')->store('public');
+        }
+        else
+          $path = "";
     
         Client::create([
             'name' => $request->name,
@@ -101,19 +104,27 @@ class ClientsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateClientRequest $request, $id)
     {
         $client=Client::find($id);
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public');
         
+          }
             $client->name = $request->name;
             $client->email=$request->email;
-            $client->password=$request->password;
             $client->mobile=$request->phone;
             $client->country=$request->country;
             $client->gender=$request->gender;
-            $client->save();
+
+            if($request->avatar)
+            {
+                Storage::delete(str_replace("/storage", "public", $client->avatar));
+                $path = $request->file('avatar')->store('public');  
+                $client->avatar = $path;
+            }
             
-        
+            $client->save();
         
             return redirect('/clients');
     }

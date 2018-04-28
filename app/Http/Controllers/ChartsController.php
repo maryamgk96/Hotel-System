@@ -36,7 +36,17 @@ class ChartsController extends Controller
                    $revenues[$monthlyRevenue->month]=$monthlyRevenue->revenue;
                 }
             } 
-        return view('statistics.statistics',['male' => $MaleReservations,'female' => $FemaleReservations,'jan'=>$revenues[0],'feb'=>$revenues[1],'mar'=>$revenues[2],'apr'=>$revenues[3],'may'=>$revenues[4],'jun'=>$revenues[5],'jul'=>$revenues[6],'aug'=>$revenues[7],'sep'=>$revenues[8],'oct'=>$revenues[9],'nov'=>$revenues[10],'dec'=>$revenues[11]]);
+
+
+        $countriesReservations=DB::table('reservations')
+        ->join('clients','reservations.client_id', '=', 'clients.id')
+            
+        ->select( 'clients.country as co',DB::raw('COUNT(client_id) as c'))
+        ->groupBy(DB::raw('country'))
+        ->get()->toArray();
+        
+        
+        return view('statistics.statistics',['countries'=>$countriesReservations,'male' => $MaleReservations,'female' => $FemaleReservations,'jan'=>$revenues[0],'feb'=>$revenues[1],'mar'=>$revenues[2],'apr'=>$revenues[3],'may'=>$revenues[4],'jun'=>$revenues[5],'jul'=>$revenues[6],'aug'=>$revenues[7],'sep'=>$revenues[8],'oct'=>$revenues[9],'nov'=>$revenues[10],'dec'=>$revenues[11]]);
 
         
 

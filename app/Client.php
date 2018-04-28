@@ -46,6 +46,14 @@ class Client extends Authenticatable implements FromCollection
         $this->notify(new ClientResetPassword($token));
     }
 
+    public function setAvatarAttribute($value)
+    {
+        if($value == "")
+          $this->attributes['avatar'] = "/storage/default-profile.png";
+        else
+          $this->attributes['avatar'] = "/storage".str_replace("public", "", $value);
+    }
+
 
     public function user()
     {
