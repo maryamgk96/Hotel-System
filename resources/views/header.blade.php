@@ -64,7 +64,7 @@
                 <!-- The user image in the menu -->
                 <li class="user-header">
                   <img src="<?php  if($user){url(Auth::user()->avatar);}
-                elseif($client){ Auth::guard('client')->user()->avatar;}?>" class="img-circle" alt="User Image">
+                elseif($client){ Auth::guard('client')->user()->avatar;}?>" class="img-circle">
                   <p>
                 <span class="hidden-xs"><?php  if($user){?>
                   {{Auth::user()->name}}<?php
