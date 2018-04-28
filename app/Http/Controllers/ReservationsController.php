@@ -22,9 +22,15 @@ class ReservationsController extends Controller
     public function index(){
         $client= Auth::guard('client')->user();
         if($client)
-        {
+        {   
+            if($client->is_approved==1)
+            {
             return view('reservations.index');
-        
+            }
+            else
+            {
+                //return pending view 
+            }
         }
         else{
             
@@ -52,7 +58,7 @@ class ReservationsController extends Controller
             'source'  => $request->stripeToken
         ));
         Charge::create ( array (
-            "amount" => $room->price,
+            "amount" => $request->paid_price,
             "currency" => "usd",
             "description" => "Test payment.", 
             "source" => "tok_amex"
