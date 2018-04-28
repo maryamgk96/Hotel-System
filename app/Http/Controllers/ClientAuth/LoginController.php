@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Hesto\MultiAuth\Traits\LogsoutGuard;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -22,6 +23,7 @@ class LoginController extends Controller
 
     use AuthenticatesUsers, LogsoutGuard {
         LogsoutGuard::logout insteadof AuthenticatesUsers;
+        logout as performLogout;
     }
 
     /**
@@ -59,5 +61,11 @@ class LoginController extends Controller
     protected function guard()
     {
         return Auth::guard('client');
+    }
+
+    public function logout(Request $request)
+    {
+    $this->performLogout($request);
+    return redirect()->route('clientlogin');
     }
 }

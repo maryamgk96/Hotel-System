@@ -51,10 +51,12 @@ class ClientsController extends Controller
      */
     public function store(StoreClientRequest $request)
     {   
-        if ($request->hasFile('avatar')) {
-            $path = $request->file('avatar')->store('public');
-        
-          }
+        if( $request->file('avatar'))
+        {
+          $path = $request->file('avatar')->store('public');
+        }
+        else
+          $path = "";
     
         Client::create([
             'name' => $request->name,
@@ -114,10 +116,15 @@ class ClientsController extends Controller
             $client->mobile=$request->phone;
             $client->country=$request->country;
             $client->gender=$request->gender;
-            $client->avatar=$path;
-            $client->save();
+
+            if($request->avatar)
+            {
+                Storage::delete(str_replace("/storage", "public", $client->avatar));
+                $path = $request->file('avatar')->store('public');  
+                $client->avatar = $path;
+            }
             
-        
+            $client->save();
         
             return redirect('/clients');
     }

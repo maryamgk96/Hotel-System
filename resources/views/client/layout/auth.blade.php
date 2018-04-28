@@ -33,22 +33,17 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
                     </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
             
             </div>
-
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
             
-
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                
@@ -60,7 +55,6 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
-
                             <ul class="dropdown-menu" role="menu">
                                 <li>
                                     <a href="{{ url('/client/logout') }}"
@@ -68,7 +62,6 @@
                                                  document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-
                                     <form id="logout-form" action="{{ url('/client/logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
@@ -83,7 +76,6 @@
     <main class="py-4">
     @yield('content')
     </main>
-
     <!-- Scripts -->
     <script src="/js/app.js"></script>
 </body>
