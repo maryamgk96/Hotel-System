@@ -46,10 +46,10 @@
                 <!-- The user image in the navbar-->
                 <?php if($user):                
                 ?>
-                <img src="{{ url(Auth::user()->avatar) }}" class="user-image" alt="User Image">
+                <img src="{{ url(Auth::user()->avatar) }}" class="user-image" >
                 <?php elseif($client): 
                 ?>
-                <img src="{{ url(Auth::guard('client')->user()->avatar) }}" class="user-image" alt="User Image">
+                <img src="{{ url(Auth::guard('client')->user()->avatar) }}" class="user-image">
                 <?php endif; ?>
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
                 <span class="hidden-xs"><?php  if($user){?>
