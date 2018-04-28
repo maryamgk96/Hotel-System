@@ -29,7 +29,7 @@ class ReservationsController extends Controller
             }
             else
             {
-                //return pending view 
+                return view('clients.pending');
             }
         }
         else{

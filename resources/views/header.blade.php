@@ -81,8 +81,15 @@
                   </p>
                 </li>
                 <li class="user-footer">
+
                   <div class="pull-left">
-                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <?php  if($user){?>
+                    <a href="profile/{{Auth::user()->id}}/edit" class="btn btn-default btn-flat">Edit Profile</a>
+                    <?php
+                  } 
+                  elseif($client){?>
+                   <a href="/clients/{{Auth::guard('client')->user()->id}}/edit" class="btn btn-default btn-flat">Edit Profile</a>
+                  <?php } ?>
                   </div>
                   <div class="pull-right">
                       <?php  if($user): ?>
