@@ -63,8 +63,13 @@
               <ul class="dropdown-menu">
                 <!-- The user image in the menu -->
                 <li class="user-header">
-                  <img src="<?php  if($user){url(Auth::user()->avatar);}
-                elseif($client){ Auth::guard('client')->user()->avatar;}?>" class="img-circle">
+                    <?php if($user):                
+                    ?>
+                    <img src="{{ url(Auth::user()->avatar) }}" class="user-image" >
+                    <?php elseif($client): 
+                    ?>
+                    <img src="{{ url(Auth::guard('client')->user()->avatar) }}" class="user-image">
+                    <?php endif; ?>
                   <p>
                 <span class="hidden-xs"><?php  if($user){?>
                   {{Auth::user()->name}}<?php
@@ -80,7 +85,26 @@
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="/logout" class="btn btn-default btn-flat">Log Out</a>
+                      <?php  if($user): ?>
+                      <a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                         {{ __('Logout') }}
+                     </a>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                    <?php 
+                     elseif($client) : ?>
+                     <a href="{{ url('/client/logout') }}"
+                     onclick="event.preventDefault();
+                     document.getElementById('logout-form').submit();">
+                     Logout
+                     </a>
+                 <form id="logout-form" action="{{ url('/client/logout') }}" method="POST" style="display: none;">
+                 {{ csrf_field() }}
+                </form>
+                     <?php endif ?>
                   </div>
                 </li>
               </ul>
