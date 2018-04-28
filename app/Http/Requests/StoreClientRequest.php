@@ -30,7 +30,7 @@ class StoreClientRequest extends FormRequest
             'phone'=>'required|regex:/(01)[0-9]{9}/',
             'country'=>'required',
             'gender'=>'required',
-            'avatar'=>'required|mimes:jpeg,png'
+            'avatar'=>'mimes:jpeg,png'
             
         ];
     }
