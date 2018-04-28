@@ -30,21 +30,21 @@ Route::get('clients', 'ClientsController@index');
 Route::get('clients/myclients', 'ClientsController@showMyClients')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('clientsdata', 'AjaxController@clientsDataAjax');
 Route::get('approvedClients', 'AjaxController@approvedClients')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
-Route::get('clients/create', 'ClientsController@create');
+Route::get('clients/create', 'ClientsController@create')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::post('clients','ClientsController@store');
-Route::get('clients/{id}/edit', 'ClientsController@edit');
+Route::get('clients/{id}/edit', 'ClientsController@edit')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::put('clients/{id}', 'ClientsController@update');
-Route::get('clients/{id}/approve','ClientsController@approve');
+Route::get('clients/{id}/approve','ClientsController@approve')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');;
 
 Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delete');
 
 
 //manage reservations routes
-Route::get('reservations', 'ReservationsController@index');
+Route::get('reservations', 'ReservationsController@index')->middleware('auth:client');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
 Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
-Route::get('reservations/rooms', 'ReservationsController@show');
-Route::get ('reservations/create/{room_id}','ReservationsController@create');
+Route::get('reservations/rooms', 'ReservationsController@show')->middleware('auth:client');
+Route::get ('reservations/create/{room_id}','ReservationsController@create')->middleware('auth:client');
 Route::post('reservations/{room_id}','ReservationsController@store');
 Route::get('allreservations', 'AjaxController@reservationsDataAjax');
 
@@ -140,7 +140,7 @@ Route::group(['prefix' => 'client'], function () {
 Route::get(
     'statistics',
     'ChartsController@index'
-)->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
+)->middleware('auth','role:admin|manager','forbid-banned-user');
 
 // Route for export/download tabledata to .csv, .xls or .xlsx
 Route::get('downloadExcel/{type}', 'ExcelsheetsController@downloadExcel');
