@@ -37,7 +37,7 @@ class LoginController extends Controller
     }
     
     else if ( $user->hasRole('manager') ) {
-        return redirect('receptionists');
+        return redirect('statistics');
     }
 
     else

@@ -21,14 +21,16 @@ class ReservationsController extends Controller
 {
     public function index(){
         $client= Auth::guard('client')->user();
+        
         if($client)
         {   
             if($client->is_approved==1)
             {
+                
             return view('reservations.index');
             }
             else
-            {
+            {  
                 return view('clients.pending');
             }
         }
