@@ -165,5 +165,46 @@ class ClientsController extends Controller
 
         return view('clients.myClients');
     }
+    public function editprofile($id)
+    {
+        $client = Client::find($id);
+        $countries =  Cache::rememberForever('countries', function() {
+            return countries();
+        });
+
+        return view('clients.editprofile',compact('countries','client'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function updateprofile(UpdateClientRequest $request, $id)
+    {
+        $client=Client::find($id);
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store('public');
+        
+          }
+            $client->name = $request->name;
+            $client->email=$request->email;
+            $client->mobile=$request->phone;
+            $client->country=$request->country;
+            $client->gender=$request->gender;
+
+            if($request->avatar)
+            {
+                Storage::delete(str_replace("/storage", "public", $client->avatar));
+                $path = $request->file('avatar')->store('public');  
+                $client->avatar = $path;
+            }
+            
+            $client->save();
+        
+            return redirect('/reservations');
+    }
    
 }

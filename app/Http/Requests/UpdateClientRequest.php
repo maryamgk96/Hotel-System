@@ -24,12 +24,9 @@ class UpdateClientRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3',
-            'email' => 'required|unique:clients,email,'.$id,
-            'password'=> 'required|min:5',
-            'phone'=>'required|regex:/(01)[0-9]{9}/',
-            'country'=>'required',
-            'gender'=>'required',
+            'name' => 'min:3',
+            'email' => 'unique:clients,email,'.$this->id,
+            'phone'=>'regex:/(01)[0-9]{9}/',
             'avatar'=>'mimes:jpeg,png'
         ];
     }

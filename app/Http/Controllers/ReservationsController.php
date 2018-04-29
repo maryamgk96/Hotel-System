@@ -58,7 +58,7 @@ class ReservationsController extends Controller
             'source'  => $request->stripeToken
         ));
         Charge::create ( array (
-            "amount" => $request->paid_price,
+            "amount" =>($request->paid_price)*100 ,
             "currency" => "usd",
             "description" => "Test payment.", 
             "source" => "tok_amex"

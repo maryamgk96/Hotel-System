@@ -6,9 +6,11 @@
 <div class="row">
 <div class="col-md-6" id="pieChart" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 <div class="col-md-6" id="lineChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+</div>
+<br>
+<div class="row">
 <div class="col-md-6" id="countries" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
 <div class="col-md-6" id="top" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
-
 </div>
 <script>
 Highcharts.chart('pieChart', {

@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('avatar')->default(' ');
-            $table->integer('mobile')->nullable();
+            $table->string('mobile')->nullable();
             $table->string('country');
             $table->smallInteger('gender');
             $table->boolean('is_approved')->default(0);

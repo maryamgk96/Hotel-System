@@ -606,6 +606,7 @@ a:focus {
     margin-right: -15px;
     font-size: 18px;
   }
+
   .sidebar-mini.sidebar-collapse .main-header .logo > .logo-lg {
     display: none;
   }
@@ -4979,3 +4980,10 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+/* .nav-container {
+  padding-right: 100px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+} */

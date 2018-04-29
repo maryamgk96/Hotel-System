@@ -34,13 +34,15 @@ Route::get('clients/create', 'ClientsController@create')->middleware('auth','rol
 Route::post('clients','ClientsController@store');
 Route::get('clients/{id}/edit', 'ClientsController@edit')->middleware('auth','role:admin|manager','forbid-banned-user');
 Route::put('clients/{id}', 'ClientsController@update');
+Route::get('profilee/{id}/edit', 'ClientsController@editprofile')->middleware('auth:client');
+Route::put('profilee/{id}', 'ClientsController@updateprofile');
 Route::get('clients/{id}/approve','ClientsController@approve')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');;
 
 Route::delete('clients/delete', 'ClientsController@destroy')->name('client.delete');
 
 
 //manage reservations routes
-Route::get('reservations', 'ReservationsController@index')->middleware('auth:client');
+Route::get('reservations', 'ReservationsController@index');
 Route::get('reservationdata', 'AjaxController@reservationDataAjax');
 Route::get('reservations/roomsdata', 'AjaxController@showRoomAjaxData');
 Route::get('reservations/rooms', 'ReservationsController@show')->middleware('auth:client');
@@ -53,12 +55,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+        
 //UserController Routes
 Route::get(
     '{role}',
     'UserController@index'
-)->name('users.index')->where('role', 'managers|receptionists')->middleware('auth','role:admin|manager|receptionist','forbid-banned-user');
+)->name('users.index')->where('role', 'managers|receptionists')->middleware('web','role:admin|manager|receptionist','forbid-banned-user');
 Route::get('getManagersData', 'AjaxController@managersDataAjax');
 Route::get('getReceptionistsData', 'AjaxController@receptionistsDataAjax');
 Route::get('deleteData/{id}', 'AjaxController@managersDataAjax');

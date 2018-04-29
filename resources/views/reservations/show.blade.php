@@ -1,4 +1,4 @@
-@extends('admin_template')
+@extends('atemplate')
 
 @section('content')
                <h2>Available Rooms</h2>

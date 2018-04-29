@@ -15,10 +15,6 @@
         </button>
       </div>
 
-    
-     
-      <!-- /.navbar-collapse -->
-     
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -28,42 +24,51 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <!-- The user image in the navbar-->
              
-              <img src="{{ url(Auth::user()->avatar) }}" class="user-image" >
-             
+              <img src="{{ url(Auth::guard('client')->user()->avatar) }}" class="user-image">
+
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">
-                {{Auth::user()->name}} 
-               </span>
+
+                {{Auth::guard('client')->user()->name}}
+                
+              </span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                  <img src="{{ url(Auth::user()->avatar) }}" class="user-image" >
+
+                  <img src="{{ url(Auth::guard('client')->user()->avatar) }}" class="user-image">
+              
                 <p>
               <span class="hidden-xs">
-                {{Auth::user()->name}}
+                {{Auth::guard('client')->user()->name}}
                 </p>
               </li>
               <li class="user-footer">
+
                 <div class="pull-left">
-                  <a href="/profile/{{Auth::user()->id}}/edit" class="btn btn-default btn-flat">Edit Profile</a>    
+    
+                 <a href="/profilee/{{Auth::guard('client')->user()->id}}/edit" class="btn btn-default btn-flat">Edit Profile</a>
+
                 </div>
                 <div class="pull-right">
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                      onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                       {{ __('Logout') }}
+                  
+                   <a href="{{ url('/client/logout') }}"
+                   onclick="event.preventDefault();
+                   document.getElementById('logout-form').submit();">
+                   Logout
                    </a>
-                   <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                      @csrf
-                  </form>
+               <form id="logout-form" action="{{ url('/client/logout') }}" method="POST" style="display: none;">
+               {{ csrf_field() }}
+              </form>
+
                 </div>
               </li>
             </ul>
           </li>
         </ul>
       </div>
- 
+    
       <!-- /.navbar-custom-menu -->
     </div>
     <!-- /.container-fluid -->

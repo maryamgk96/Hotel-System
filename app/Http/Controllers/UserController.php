@@ -198,7 +198,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function updateProdile(UpdateUserRequest $request,$id){
+    public function updateProfile(UpdateUserRequest $request,$id){
         $user = User::find($id);
             $user->email = $request->email;
             $user->name = $request->name;

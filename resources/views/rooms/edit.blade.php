@@ -1,10 +1,6 @@
 
-
-
-    @endsection@extends('admin_template')
+@extends('admin_template')
 @section('content')
-
-
 @if ($errors->any())
 <div class="alert alert-danger">
     <ul>
@@ -66,3 +62,4 @@
         </div>
         </form>
     </div>
+    @endsection

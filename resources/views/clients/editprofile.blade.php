@@ -1,4 +1,4 @@
-@extends('admin_template')
+@extends('atemplate')
 
 @section('content')
 
@@ -21,11 +21,11 @@
         <!-- Horizontal Form -->
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">Update Client</h3>
+                <h3 class="box-title">Edit Profile</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form" method="post" class="form-horizontal" action="/clients/{{$client->id}}" enctype="multipart/form-data">
+            <form role="form" method="post" class="form-horizontal" action="/profilee/{{$client->id}}" enctype="multipart/form-data">
                 {{method_field('put')}}
                 @csrf
 
@@ -67,6 +67,7 @@
                         <div class="col-lg-6">
                             <label>Gender</label>                
                             <div class="input-group">
+
 @if($client->gender == 1)
 <input type="radio" name="gender" value="1" checked="checked"> Female<br>   
                                 <input type="radio" name="gender" value="0" > Male<br>
@@ -74,7 +75,7 @@
 
                                 <input type="radio" name="gender" value="0" checked="checked"> Male<br>
                                 <input type="radio" name="gender" value="1" > Female<br> 
-                                @endif           
+                                @endif                   
 
                             </div>
                             <!-- /input-group -->

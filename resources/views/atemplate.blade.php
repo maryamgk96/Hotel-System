@@ -42,11 +42,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <div class="wrapper">
 
     <!-- Header -->
-    @include('header')
+    @include('head')
 
-
-    @include('sidebar')
-
+     @include('sidebarC')
 
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
