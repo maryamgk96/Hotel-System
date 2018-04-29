@@ -82,8 +82,16 @@ class ReservationsController extends Controller
     } 
     
     public function show()
-    {
-        return view('reservations.show');
+    {   $client= Auth::guard('client')->user();
+       
+            if($client->is_approved==1)
+            {
+                return view('reservations.show');
+            }
+            else
+            {
+                return view('clients.pending');
+            }
     }
    
 }
